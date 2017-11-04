@@ -1,0 +1,46 @@
+c:\users\lenovo\documents\visual studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\bin\Debug\WindowsFormsProjectGDAL.exe.config
+c:\users\lenovo\documents\visual studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\bin\Debug\WindowsFormsProjectGDAL.exe
+c:\users\lenovo\documents\visual studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\bin\Debug\WindowsFormsProjectGDAL.pdb
+c:\users\lenovo\documents\visual studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.csprojResolveAssemblyReference.cache
+c:\users\lenovo\documents\visual studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.Properties.Resources.resources
+c:\users\lenovo\documents\visual studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.csproj.GenerateResource.Cache
+c:\users\lenovo\documents\visual studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.exe
+c:\users\lenovo\documents\visual studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.pdb
+c:\users\lenovo\documents\visual studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\bin\Debug\gdalconst_csharp.dll
+c:\users\lenovo\documents\visual studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\bin\Debug\gdal_csharp.dll
+c:\users\lenovo\documents\visual studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\bin\Debug\ogr_csharp.dll
+c:\users\lenovo\documents\visual studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\bin\Debug\osr_csharp.dll
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 3\WindowsFormsProjectGDAL\bin\Debug\WindowsFormsProjectGDAL.exe.config
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 3\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.exe
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 3\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.pdb
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 3\WindowsFormsProjectGDAL\bin\Debug\WindowsFormsProjectGDAL.exe
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 3\WindowsFormsProjectGDAL\bin\Debug\WindowsFormsProjectGDAL.pdb
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 3\WindowsFormsProjectGDAL\bin\Debug\gdalconst_csharp.dll
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 3\WindowsFormsProjectGDAL\bin\Debug\gdal_csharp.dll
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 3\WindowsFormsProjectGDAL\bin\Debug\ogr_csharp.dll
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 3\WindowsFormsProjectGDAL\bin\Debug\osr_csharp.dll
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 3\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.csprojResolveAssemblyReference.cache
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 3\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.Form1.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 3\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.Properties.Resources.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 3\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.csproj.GenerateResource.Cache
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 3\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.Image.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 4\WindowsFormsProjectGDAL\bin\Debug\WindowsFormsProjectGDAL.exe.config
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 4\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.exe
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 4\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.pdb
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 4\WindowsFormsProjectGDAL\bin\Debug\WindowsFormsProjectGDAL.exe
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 4\WindowsFormsProjectGDAL\bin\Debug\WindowsFormsProjectGDAL.pdb
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 4\WindowsFormsProjectGDAL\bin\Debug\gdalconst_csharp.dll
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 4\WindowsFormsProjectGDAL\bin\Debug\gdal_csharp.dll
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 4\WindowsFormsProjectGDAL\bin\Debug\ogr_csharp.dll
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 4\WindowsFormsProjectGDAL\bin\Debug\osr_csharp.dll
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 4\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.csprojResolveAssemblyReference.cache
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 4\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.MainForm.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 4\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.Properties.Resources.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 4\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.csproj.GenerateResource.Cache
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 4\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.Model.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 4\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.PictureShow.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 4\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.Picture.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.MainForm.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.PictureShow.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.Model.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.Picture.resources
