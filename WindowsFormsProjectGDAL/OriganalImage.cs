@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
+using System.IO;
+using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 
 namespace WindowsFormsProjectGDAL
 {
@@ -43,9 +46,9 @@ namespace WindowsFormsProjectGDAL
         {
             dataSet = Gdal.Open(filename, Access.GA_ReadOnly);
 
-            blue = dataSet.GetRasterBand(1);
+            blue = dataSet.GetRasterBand(3);
             green = dataSet.GetRasterBand(2);
-            red = dataSet.GetRasterBand(3);
+            red = dataSet.GetRasterBand(1);
 
             width = dataSet.RasterXSize;
             height = dataSet.RasterYSize;
@@ -75,17 +78,49 @@ namespace WindowsFormsProjectGDAL
             blueBitmap = new Bitmap(width, height);
             blueGrayBitmap = new Bitmap(width, height);
 
+            blueGrayBitmap = blueBitmap;
+
+
+            BitmapData bmpData = blueBitmap.LockBits(new Rectangle(0, 0, blueBitmap.Width, blueBitmap.Height),
+                                    System.Drawing.Imaging.ImageLockMode.ReadWrite,
+                                    blueBitmap.PixelFormat);
+
+            IntPtr ptr = bmpData.Scan0;
+            int bytes = blueBitmap.Width * blueBitmap.Height * 4;
+            byte[] rgbValues = new byte[bytes];
+
+            // Copy the RGB values into the array.
+            //Marshal.Copy(ptr, rgbValues, 0, bytes);
+
+            // Set every red value to 255. 
+             
             int t = 0;
 
-            for (var i = 0; i < blueBitmap.Height; i++)
+            for (int i = 0; i < rgbValues.Length; t++)
             {
-                for (var j = 0; j < blueBitmap.Width; j++)
-                {
-                    blueGrayBitmap.SetPixel(j, i, Color.FromArgb(255, blueBuffer[t], blueBuffer[t], blueBuffer[t]));
-                    blueBitmap.SetPixel(j, i, Color.FromArgb(255, 0, 0, blueBuffer[t++]));
-                }
-                progressBar1.Value += 1;
+                rgbValues[i++] = 255;
+                rgbValues[i++] = 0;
+                rgbValues[i++] = 0;
+                rgbValues[i++] = blueBuffer[t];
             }
+            
+            // Copy the RGB values back to the bitmap
+            Marshal.Copy(rgbValues, 0, ptr, bytes);
+
+            // Unlock the bits.
+            blueBitmap.UnlockBits(bmpData);
+
+            //int t = 0;
+
+            //for (var i = 0; i < blueBitmap.Height; i++)
+            //{
+            //    for (var j = 0; j < blueBitmap.Width; j++)
+            //    {
+            //        blueGrayBitmap.SetPixel(j, i, Color.FromArgb(255, blueBuffer[t], blueBuffer[t], blueBuffer[t]));
+            //        blueBitmap.SetPixel(j, i, Color.FromArgb(255, 0, 0, blueBuffer[t++]));
+            //    }
+            //    progressBar1.Value += 1;
+            //}
 
         }
 
@@ -137,7 +172,7 @@ namespace WindowsFormsProjectGDAL
             {
                 for (var j = 0; j < redBitmap.Width; j++, t++)
                 {
-                    rgbBitmap.SetPixel(j, i, Color.FromArgb(255, blueBuffer[t], greenBuffer[t], redBuffer[t]));
+                    rgbBitmap.SetPixel(j, i, Color.FromArgb(255, redBuffer[t], greenBuffer[t], blueBuffer[t]));
                 }
                 progressBar1.Value += 1;
             }
