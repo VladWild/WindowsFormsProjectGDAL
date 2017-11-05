@@ -78,49 +78,17 @@ namespace WindowsFormsProjectGDAL
             blueBitmap = new Bitmap(width, height);
             blueGrayBitmap = new Bitmap(width, height);
 
-            blueGrayBitmap = blueBitmap;
-
-
-            BitmapData bmpData = blueBitmap.LockBits(new Rectangle(0, 0, blueBitmap.Width, blueBitmap.Height),
-                                    System.Drawing.Imaging.ImageLockMode.ReadWrite,
-                                    blueBitmap.PixelFormat);
-
-            IntPtr ptr = bmpData.Scan0;
-            int bytes = blueBitmap.Width * blueBitmap.Height * 4;
-            byte[] rgbValues = new byte[bytes];
-
-            // Copy the RGB values into the array.
-            //Marshal.Copy(ptr, rgbValues, 0, bytes);
-
-            // Set every red value to 255. 
-             
             int t = 0;
 
-            for (int i = 0; i < rgbValues.Length; t++)
+            for (var i = 0; i < blueBitmap.Height; i++)
             {
-                rgbValues[i++] = 255;
-                rgbValues[i++] = 0;
-                rgbValues[i++] = 0;
-                rgbValues[i++] = blueBuffer[t];
+                for (var j = 0; j < blueBitmap.Width; j++)
+                {
+                    blueGrayBitmap.SetPixel(j, i, Color.FromArgb(255, blueBuffer[t], blueBuffer[t], blueBuffer[t]));
+                    blueBitmap.SetPixel(j, i, Color.FromArgb(255, 0, 0, blueBuffer[t++]));
+                }
+                progressBar1.Value += 1;
             }
-            
-            // Copy the RGB values back to the bitmap
-            Marshal.Copy(rgbValues, 0, ptr, bytes);
-
-            // Unlock the bits.
-            blueBitmap.UnlockBits(bmpData);
-
-            //int t = 0;
-
-            //for (var i = 0; i < blueBitmap.Height; i++)
-            //{
-            //    for (var j = 0; j < blueBitmap.Width; j++)
-            //    {
-            //        blueGrayBitmap.SetPixel(j, i, Color.FromArgb(255, blueBuffer[t], blueBuffer[t], blueBuffer[t]));
-            //        blueBitmap.SetPixel(j, i, Color.FromArgb(255, 0, 0, blueBuffer[t++]));
-            //    }
-            //    progressBar1.Value += 1;
-            //}
 
         }
 
