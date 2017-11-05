@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -10,62 +11,46 @@ namespace WindowsFormsProjectGDAL
 {
     class Correlator
     {
-        private static int i0;
-        private static int j0;
-        private static int iFanal;
-        private static int jFanal;
         private static Rectangle rectSearch;
+        private static byte[,] searchByte;
+        private static byte[,] modelByte;
 
-        private static void coordinates(Bitmap image, Bitmap model, Rectangle rect)
+        //возвращает прямоугольник области поиска
+        private static Rectangle getRectSearch(Bitmap image, Rectangle rect)
         {
             if (rect.X == 0 || rect.Y == 0)
             {
-                i0 = 0;
-                j0 = 0;
-                iFanal = image.Width;
-                jFanal = image.Height;
-                rectSearch = new Rectangle(0, 0, image.Width, image.Height);
+                return new Rectangle(0, 0, image.Width, image.Height);
             }
             else
             {
-                i0 = rect.X;
-                j0 = rect.Y;
-                iFanal = rect.X + rect.Width;
-                jFanal = rect.Y + rect.Height;
-                rectSearch = new Rectangle(rect.X, rect.Y, rect.Width, rect.Height);
+                return new Rectangle(rect.X, rect.Y, rect.Width, rect.Height);
             }
         }
 
-        //классическая корреляция с нормированием
-        public static Point classicNorm(Colors color, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1)
+        //получение двумерного массива значения яркостей пикселей в области поиска
+        private static void getSearchByteArray(Bitmap image, Rectangle rect)
         {
-            Point point = new Point();
-
-            double F = 0;
-            double F2 = 0;
-            double F3 = 0;
-            double F4 = 0;
-            double Fmax = double.MinValue;
-
-            coordinates(image, model, rect);
-
-            //создание двумерного массива пикселей яркостей определенного
-            //канала для более быстрых вычислений
-            //----------------------------------------------------------------------------
-            byte[,] searchByte = new byte[rectSearch.Width, rectSearch.Height];
-            byte[,] modelByte = new byte[model.Width, model.Height];
+            searchByte = new byte[rectSearch.Width, rectSearch.Height];
 
             int i2 = 0;
             int j2 = 0;
 
-            for (int i = i0; i < iFanal; i++, i2++)
+            for (int i = rect.X; i < rect.X + rectSearch.Width; i++, i2++)
             {
-                for (int j = j0; j < jFanal; j++, j2++)
+                for (int j = rect.Y; j < rect.Y + rectSearch.Height; j++, j2++)
                 {
                     searchByte[i2, j2] = (byte) (((UInt32)image.GetPixel(i, j).ToArgb()) & 0x000000FF);
                 }
                 j2 = 0;
             }
+
+        }
+
+        //получение двумерного массива значений яркостей пикселей модели
+        private static void getModelByteArray(Colors color, Bitmap model, Rectangle rect)
+        {
+            modelByte = new byte[model.Width, model.Height];
 
             for (int i = 0; i < model.Width; i++)
             {
@@ -76,23 +61,45 @@ namespace WindowsFormsProjectGDAL
                     if (color == Colors.RED) modelByte[i, j] = ((byte)((((UInt32)model.GetPixel(i, j).ToArgb()) & 0x00FF0000) >> 16));
                 }
             }
-            //--------------------------------------------------------------------------
+        }
 
+        private static void setingProgressBar(ProgressBar progressBar1, Bitmap model)
+        {
             progressBar1.Minimum = 0;
-            progressBar1.Maximum = rectSearch.Width;
+            progressBar1.Maximum = rectSearch.Width - model.Width;
             progressBar1.Value = 0;
+        }
 
-            for (int i = 0; i < rectSearch.Width; i++)
+        //классическая корреляция с нормированием
+        public static Point classicNorm(Colors color, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch)
+        {
+            Point point = new Point();
+
+            double F = 0;
+            double F2 = 0;
+            double F3 = 0;
+            double F4 = 0;
+            double Fmax = double.MinValue;
+
+            rectSearch = getRectSearch(image, rect);
+
+            getSearchByteArray(image, rect);
+            getModelByteArray(color, model, rect);
+
+            setingProgressBar(progressBar1, model);
+
+            sWatch.Start();
+            for (int i = 0; i < rectSearch.Width - model.Width; i++)
             {
-                for (int j = 0; j < rectSearch.Height; j++)
+                for (int j = 0; j < rectSearch.Height - model.Height; j++)
                 {
-                    for (int i4 = 0; i4 < model.Width; i4++)
+                    for (int i2 = 0; i2 < model.Width; i2++)
                     {
-                        for (int j4 = 0; j4 < model.Height; j4++)
+                        for (int j2 = 0; j2 < model.Height; j2++)
                         {
-                            F2 += modelByte[i4, j4] * searchByte[i, j];
-                            F3 += modelByte[i4, j4] * modelByte[i4, j4];
-                            F4 += searchByte[i, j] * searchByte[i, j];
+                            F2 += modelByte[i2, j2] * searchByte[i + i2, j + j2];
+                            F3 += modelByte[i2, j2] * modelByte[i2, j2];
+                            F4 += searchByte[i + i2, j + j2] * searchByte[i + i2, j + j2];
                         }
                     }
                     F = F2 / (Math.Pow(F3, 0.5) * Math.Pow(F4, 0.5));
@@ -109,94 +116,92 @@ namespace WindowsFormsProjectGDAL
                 }
                 ++progressBar1.Value;
             }
+            sWatch.Stop();
             progressBar1.Value = 0;
             return point;
         }
 
         //разностная корреляция с модулем
-        public static Point diffAbs(Colors color, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1)
-        {
-            Point point = new Point();
-
-            int F = 0;
-            int Fmin = int.MaxValue;
-
-            coordinates(image, model, rect);
-
-            progressBar1.Minimum = 0;
-            progressBar1.Maximum = iFanal - i0;
-            progressBar1.Value = 0;
-
-            byte pixel = 0;
-
-            for (int i = i0; i < iFanal; i++)
-            {
-                for (int j = j0; j < jFanal; j++)
-                {
-                    for (int i2 = 0; i2 < model.Width; i2++)
-                    {
-                        for (int j2 = 0; j2 < model.Height; j2++)
-                        {
-                            if (color == Colors.BLUE) pixel = ((byte)( ((UInt32) model.GetPixel(i2, j2).ToArgb()) & 0x000000FF));
-                            if (color == Colors.GREEN) pixel = ((byte)( ( ((UInt32)model.GetPixel(i2, j2).ToArgb()) & 0x0000FF00) >> 8) );
-                            if (color == Colors.RED) pixel = ((byte)((((UInt32)model.GetPixel(i2, j2).ToArgb()) & 0x00FF0000) >> 16));
-                            F += Math.Abs(((byte)(((UInt32)image.GetPixel(i + i2, j + j2).ToArgb()) & 0x000000FF)) - pixel);
-                        }
-                    }
-                    if (F < Fmin)
-                    {
-                        Fmin = F;
-                        point.X = i;
-                        point.Y = j;
-                    }
-                    F = 0;
-                }
-                ++progressBar1.Value;
-            }
-            progressBar1.Value = 0;
-            return point;
-        }
-
-        //разностная корреляция с квадратом
-        public static Point diffSqr(Colors color, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1)
+        public static Point diffAbs(Colors color, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch)
         {
             Point point = new Point();
 
             double F = 0;
             double Fmin = double.MaxValue;
 
-            coordinates(image, model, rect);
+            rectSearch = getRectSearch(image, rect);
 
-            progressBar1.Minimum = 0;
-            progressBar1.Maximum = iFanal - i0;
-            progressBar1.Value = 0;
+            getSearchByteArray(image, rect);
+            getModelByteArray(color, model, rect);
 
-            byte pixel = 0;
+            setingProgressBar(progressBar1, model);
 
-            for (int i = i0; i < iFanal; i++)
+            sWatch.Start();
+            for (int i = 0; i < rectSearch.Width - model.Width; i++)
             {
-                for (int j = j0; j < jFanal; j++)
+                for (int j = 0; j < rectSearch.Height - model.Height; j++)
                 {
                     for (int i2 = 0; i2 < model.Width; i2++)
                     {
                         for (int j2 = 0; j2 < model.Height; j2++)
                         {
-                            if (color == Colors.BLUE) pixel = ((byte)(((UInt32)model.GetPixel(i2, j2).ToArgb()) & 0x000000FF));
-                            if (color == Colors.GREEN) pixel = ((byte)((((UInt32)model.GetPixel(i2, j2).ToArgb()) & 0x0000FF00) >> 8));
-                            if (color == Colors.RED) pixel = ((byte)((((UInt32)model.GetPixel(i2, j2).ToArgb()) & 0x00FF0000) >> 16));
-                            F += Math.Pow((((byte)(((UInt32)image.GetPixel(i + i2, j + j2).ToArgb()) & 0x000000FF)) - pixel), 2);
+                            F += Math.Abs(searchByte[i + i2, j + j2] - modelByte[i2, j2]);
                         }
                     }
                     if (F < Fmin)
                     {
                         Fmin = F;
-                        point.X = i;
-                        point.Y = j;
+                        point.X = rectSearch.X + i;
+                        point.Y = rectSearch.Y + j;
                     }
                     F = 0;
                 }
                 ++progressBar1.Value;
             }
+            sWatch.Stop();
+            progressBar1.Value = 0;
+            return point;
+        }
+
+        //разностная корреляция с квадратом
+        public static Point diffSqr(Colors color, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch)
+        {
+            Point point = new Point();
+
+            double F = 0;
+            double Fmin = double.MaxValue;
+
+            rectSearch = getRectSearch(image, rect);
+
+            getSearchByteArray(image, rect);
+            getModelByteArray(color, model, rect);
+
+            setingProgressBar(progressBar1, model);
+
+            sWatch.Start();
+            for (int i = 0; i < rectSearch.Width - model.Width; i++)
+            {
+                for (int j = 0; j < rectSearch.Height - model.Height; j++)
+                {
+                    for (int i2 = 0; i2 < model.Width; i2++)
+                    {
+                        for (int j2 = 0; j2 < model.Height; j2++)
+                        {
+                            F += (searchByte[i + i2, j + j2] - modelByte[i2, j2]) * 
+                                (searchByte[i + i2, j + j2] - modelByte[i2, j2]);
+                        }
+                    }
+                    if (F < Fmin)
+                    {
+                        Fmin = F;
+                        point.X = rectSearch.X + i;
+                        point.Y = rectSearch.Y + j;
+                    }
+                    F = 0;
+                }
+                ++progressBar1.Value;
+            }
+            sWatch.Stop();
             progressBar1.Value = 0;
             return point;
         }

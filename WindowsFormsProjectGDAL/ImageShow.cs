@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,8 @@ namespace WindowsFormsProjectGDAL
         private Pen penDarkOrange;
         private Graphics gDraw;
         private Graphics gDrawPaint;
+
+        private Stopwatch sWatch;
 
         private static Bitmap modelImage;
         private static Model modelForm;
@@ -303,17 +306,19 @@ namespace WindowsFormsProjectGDAL
 
             int index;
             index = listBox1.SelectedIndex;
-            
+
+            Stopwatch sWatch = new Stopwatch();
+
             switch (index)
             {
                 case 0:
-                    point = Correlator.classicNorm(color, imageOriginGray, Model.modelImage, rectSearch, progressBar1);
+                    point = Correlator.classicNorm(color, imageOriginGray, Model.modelImage, rectSearch, progressBar1, sWatch);
                     break;
                 case 1:
-                    point = Correlator.diffAbs(color, imageOriginGray, Model.modelImage, rectSearch, progressBar1);
+                    point = Correlator.diffAbs(color, imageOriginGray, Model.modelImage, rectSearch, progressBar1, sWatch);
                     break;
                 case 2:
-                    point = Correlator.diffSqr(color, imageOriginGray, Model.modelImage, rectSearch, progressBar1);
+                    point = Correlator.diffSqr(color, imageOriginGray, Model.modelImage, rectSearch, progressBar1, sWatch);
                     break;
                 default:
                     MessageBox.Show("Select correlations");
@@ -326,7 +331,8 @@ namespace WindowsFormsProjectGDAL
                 drawImage();
                 label20.Text = "X1=" + point.X;
                 label19.Text = "Y1=" + point.Y;
-                MessageBox.Show("Rectangle found");
+                MessageBox.Show("Rectangle found\n" + "Search time: " + 
+                    (((double) sWatch.ElapsedMilliseconds) / 1000).ToString() + " sec");
             }
 
         }
