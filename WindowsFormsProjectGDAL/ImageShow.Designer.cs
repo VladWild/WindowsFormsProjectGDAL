@@ -101,6 +101,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.label22);
             this.panel2.Controls.Add(this.label21);
             this.panel2.Controls.Add(this.listBox1);
@@ -111,7 +112,6 @@
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.progressBar1);
             this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.panel3);
             this.panel2.Location = new System.Drawing.Point(0, 413);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(539, 169);
@@ -421,7 +421,7 @@
             this.panel3.Location = new System.Drawing.Point(259, 8);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(102, 79);
-            this.panel3.TabIndex = 4;
+            this.panel3.TabIndex = 17;
             // 
             // label5
             // 
@@ -430,7 +430,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(36, 13);
             this.label5.TabIndex = 2;
-            this.label5.Text = "Image";
+            this.label5.Text = "Model";
             // 
             // radioButton2
             // 
@@ -442,7 +442,6 @@
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Gray";
             this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // radioButton1
             // 
@@ -455,7 +454,6 @@
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Color";
             this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // PictureShow
             // 
@@ -491,10 +489,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label6;
@@ -525,5 +519,9 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }

@@ -20,8 +20,11 @@ namespace WindowsFormsProjectGDAL
         private String filename = "C:/Users/Lenovo/Documents/Visual Studio 2015/Projects/WindowsFormsProjectGDAL/WindowsFormsProjectGDAL/resources/images/nature.jpg";
         private OriganalImage orgImg;
 
+        private static Colors colorModel; 
+
         private static Model model;
         private static Bitmap modelImg;
+
 
         public MainForm()
         {
@@ -45,19 +48,19 @@ namespace WindowsFormsProjectGDAL
 
         private void button2_Click(object sender, EventArgs e)
         {
-            PictureShow newForm = new PictureShow(Colors.BLUE, orgImg.getBlueBitmap(), orgImg.getBlueGrayBitmap(), modelImg, model);
+            PictureShow newForm = new PictureShow(Colors.BLUE, colorModel, orgImg.getBlueBitmap(), modelImg, model);
             newForm.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            PictureShow newForm = new PictureShow(Colors.GREEN, orgImg.getGreenBitmap(), orgImg.getGreenGrayBitmap(), modelImg, model);
+            PictureShow newForm = new PictureShow(Colors.GREEN, colorModel, orgImg.getGreenBitmap(), modelImg, model);
             newForm.Show();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            PictureShow newForm = new PictureShow(Colors.RED, orgImg.getRedBitmap(), orgImg.getRedGrayBitmap(), modelImg, model);
+            PictureShow newForm = new PictureShow(Colors.RED, colorModel, orgImg.getRedBitmap(), modelImg, model);
             newForm.Show();
         }
 

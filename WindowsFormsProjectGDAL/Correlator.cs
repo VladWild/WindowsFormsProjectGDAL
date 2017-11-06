@@ -29,7 +29,7 @@ namespace WindowsFormsProjectGDAL
         }
 
         //получение двумерного массива значения яркостей пикселей в области поиска
-        private static void getSearchByteArray(Bitmap image, Rectangle rect)
+        private static void getSearchByteArray(Colors color, Bitmap image, Rectangle rect)
         {
             searchByte = new byte[rectSearch.Width, rectSearch.Height];
 
@@ -40,7 +40,9 @@ namespace WindowsFormsProjectGDAL
             {
                 for (int j = rect.Y; j < rect.Y + rectSearch.Height; j++, j2++)
                 {
-                    searchByte[i2, j2] = (byte) (((UInt32)image.GetPixel(i, j).ToArgb()) & 0x000000FF);
+                    if (color == Colors.BLUE) searchByte[i2, j2] = (byte) (((UInt32)image.GetPixel(i, j).ToArgb()) & 0x000000FF);
+                    if (color == Colors.GREEN) searchByte[i2, j2] = ((byte)((((UInt32)image.GetPixel(i, j).ToArgb()) & 0x0000FF00) >> 8));
+                    if (color == Colors.RED) searchByte[i2, j2] = ((byte)((((UInt32)image.GetPixel(i, j).ToArgb()) & 0x00FF0000) >> 16));
                 }
                 j2 = 0;
             }
@@ -71,7 +73,7 @@ namespace WindowsFormsProjectGDAL
         }
 
         //классическая корреляция с нормированием
-        public static Point classicNorm(Colors color, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch)
+        public static Point classicNorm(Colors color, Colors colorModel, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch)
         {
             Point point = new Point();
 
@@ -83,8 +85,8 @@ namespace WindowsFormsProjectGDAL
 
             rectSearch = getRectSearch(image, rect);
 
-            getSearchByteArray(image, rect);
-            getModelByteArray(color, model, rect);
+            getSearchByteArray(color, image, rect);
+            getModelByteArray(colorModel, model, rect);
 
             setingProgressBar(progressBar1, model);
 
@@ -122,7 +124,7 @@ namespace WindowsFormsProjectGDAL
         }
 
         //разностная корреляция с модулем
-        public static Point diffAbs(Colors color, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch)
+        public static Point diffAbs(Colors color, Colors colorModel, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch)
         {
             Point point = new Point();
 
@@ -131,8 +133,8 @@ namespace WindowsFormsProjectGDAL
 
             rectSearch = getRectSearch(image, rect);
 
-            getSearchByteArray(image, rect);
-            getModelByteArray(color, model, rect);
+            getSearchByteArray(color, image, rect);
+            getModelByteArray(colorModel, model, rect);
 
             setingProgressBar(progressBar1, model);
 
@@ -164,7 +166,7 @@ namespace WindowsFormsProjectGDAL
         }
 
         //разностная корреляция с квадратом
-        public static Point diffSqr(Colors color, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch)
+        public static Point diffSqr(Colors color, Colors colorModel, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch)
         {
             Point point = new Point();
 
@@ -173,8 +175,8 @@ namespace WindowsFormsProjectGDAL
 
             rectSearch = getRectSearch(image, rect);
 
-            getSearchByteArray(image, rect);
-            getModelByteArray(color, model, rect);
+            getSearchByteArray(color, image, rect);
+            getModelByteArray(colorModel, model, rect);
 
             setingProgressBar(progressBar1, model);
 

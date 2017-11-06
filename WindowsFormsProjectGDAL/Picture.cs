@@ -25,11 +25,6 @@ namespace WindowsFormsProjectGDAL
             pictureBox1.Image = this.image;
         }
 
-        private void pictureBox1_Resize(object sender, EventArgs e)
-        {
-            
-        }
-
         private void Picture_Resize(object sender, EventArgs e)
         {
             panel1.Size = new Size(this.Width - 15, this.Height - 38);

@@ -38,10 +38,6 @@ namespace WindowsFormsProjectGDAL
         private Bitmap redBitmap;
         private Bitmap rgbBitmap;
 
-        private Bitmap blueGrayBitmap;
-        private Bitmap greenGrayBitmap;
-        private Bitmap redGrayBitmap;
-
         public OriganalImage(String filename, ProgressBar progressBar1)
         {
             dataSet = Gdal.Open(filename, Access.GA_ReadOnly);
@@ -76,7 +72,6 @@ namespace WindowsFormsProjectGDAL
         private void createBlueBitmap(ProgressBar progressBar1)
         {
             blueBitmap = new Bitmap(width, height);
-            blueGrayBitmap = new Bitmap(width, height);
 
             int t = 0;
 
@@ -84,7 +79,6 @@ namespace WindowsFormsProjectGDAL
             {
                 for (var j = 0; j < blueBitmap.Width; j++)
                 {
-                    blueGrayBitmap.SetPixel(j, i, Color.FromArgb(255, blueBuffer[t], blueBuffer[t], blueBuffer[t]));
                     blueBitmap.SetPixel(j, i, Color.FromArgb(255, 0, 0, blueBuffer[t++]));
                 }
                 progressBar1.Value += 1;
@@ -95,7 +89,6 @@ namespace WindowsFormsProjectGDAL
         private void createGreenBitmap(ProgressBar progressBar1)
         {
             greenBitmap = new Bitmap(width, height);
-            greenGrayBitmap = new Bitmap(width, height);
 
             int t = 0;
 
@@ -103,7 +96,6 @@ namespace WindowsFormsProjectGDAL
             {
                 for (var j = 0; j < greenBitmap.Width; j++)
                 {
-                    greenGrayBitmap.SetPixel(j, i, Color.FromArgb(255, greenBuffer[t], greenBuffer[t], greenBuffer[t]));
                     greenBitmap.SetPixel(j, i, Color.FromArgb(255, 0, greenBuffer[t++], 0));
                 }
                 progressBar1.Value += 1;
@@ -114,7 +106,6 @@ namespace WindowsFormsProjectGDAL
         private void createRedBitmap(ProgressBar progressBar1)
         {
             redBitmap = new Bitmap(width, height);
-            redGrayBitmap = new Bitmap(width, height);
 
             int t = 0;
 
@@ -122,7 +113,6 @@ namespace WindowsFormsProjectGDAL
             {
                 for (var j = 0; j < redBitmap.Width; j++)
                 {
-                    redGrayBitmap.SetPixel(j, i, Color.FromArgb(255, redBuffer[t], redBuffer[t], redBuffer[t]));
                     redBitmap.SetPixel(j, i, Color.FromArgb(255, redBuffer[t++], 0, 0));
                 }
                 progressBar1.Value += 1;
@@ -159,21 +149,6 @@ namespace WindowsFormsProjectGDAL
         public Bitmap getRedBitmap()
         {
             return redBitmap;
-        }
-
-        public Bitmap getBlueGrayBitmap()
-        {
-            return blueGrayBitmap;
-        }
-
-        public Bitmap getGreenGrayBitmap()
-        {
-            return greenGrayBitmap;
-        }
-
-        public Bitmap getRedGrayBitmap()
-        {
-            return redGrayBitmap;
         }
 
         public Bitmap getRGBBitmap()

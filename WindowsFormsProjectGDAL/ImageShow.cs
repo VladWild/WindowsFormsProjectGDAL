@@ -13,13 +13,11 @@ namespace WindowsFormsProjectGDAL
 {
     public partial class PictureShow : Form
     {
-        private Colors color;
+        private Colors colorImage;
 
         private Bitmap image;
-        private Bitmap imageGray;
         private Bitmap imagePaint;
         private Bitmap imageOrigin;
-        private Bitmap imageOriginGray;
 
         private Point downPoint;
         private Point upPoint;
@@ -41,6 +39,8 @@ namespace WindowsFormsProjectGDAL
 
         private Stopwatch sWatch;
 
+        private static Colors colorModel;
+
         private static Bitmap modelImage;
         private static Model modelForm;
 
@@ -49,12 +49,12 @@ namespace WindowsFormsProjectGDAL
             InitializeComponent();
         }
 
-        public PictureShow(Colors color, Bitmap image, Bitmap imageGray, Bitmap modelImg, Model model)
+        public PictureShow(Colors colorImage, Colors colorMdl, Bitmap image, Bitmap modelImg, Model model)
         {
             InitializeComponent();
 
-            this.color = color;
-            Text = color.ToString();
+            this.colorImage = colorImage;
+            Text = colorImage.ToString();
 
             isClicked = false;
 
@@ -69,9 +69,7 @@ namespace WindowsFormsProjectGDAL
             rectModel = new Rectangle();
 
             this.image = image;
-            this.imageGray = imageGray;
             imageOrigin = (Bitmap) image.Clone();
-            imageOriginGray = (Bitmap) imageGray.Clone();
             imagePaint = new Bitmap(image.Width, image.Height);
 
             panel2.Size = new Size(this.Width, panel2.Size.Height + 20);                 //изменение размеров panel2
@@ -83,6 +81,8 @@ namespace WindowsFormsProjectGDAL
 
             modelForm = model;
             modelImage = modelImg;
+
+            colorModel = colorMdl;
 
         }
 
@@ -97,8 +97,7 @@ namespace WindowsFormsProjectGDAL
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            if (radioButton1.Checked) e.Graphics.DrawImage(image, 0, 0, pictureBox1.Width, pictureBox1.Height);
-            if (radioButton2.Checked) e.Graphics.DrawImage(image, 0, 0, pictureBox1.Width, pictureBox1.Height);
+            e.Graphics.DrawImage(image, 0, 0, pictureBox1.Width, pictureBox1.Height);
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -127,6 +126,8 @@ namespace WindowsFormsProjectGDAL
 
         private void modelCreate(Rectangle rect)
         {
+            colorModel = colorImage;
+
             modelImage = new Bitmap(rect.Width + 1, rect.Height + 1);
 
             int i2 = 0;
@@ -140,7 +141,7 @@ namespace WindowsFormsProjectGDAL
                     float R = (float)((pixel & 0x00FF0000) >> 16);                  // красный
                     float G = (float)((pixel & 0x0000FF00) >> 8);                   // зеленый
                     float B = (float)(pixel & 0x000000FF);                          // синий
-                    R = G = B = R + G + B;                                          // делаем цвет одинаковым во всех трех каналах
+                    if (radioButton2.Checked) R = G = B = R + G + B;                // делаем цвет одинаковым во всех трех каналах
                     modelImage.SetPixel(j2, i2, Color.FromArgb(255, (int) R, (int) G, (int) B));
 
                 }
@@ -176,8 +177,7 @@ namespace WindowsFormsProjectGDAL
         private void drawImage()
         {
             gDrawPaint = Graphics.FromImage(imagePaint);
-            if (radioButton1.Checked) gDrawPaint.DrawRectangle(penWhite, rectModel);
-            if (radioButton2.Checked) gDrawPaint.DrawRectangle(penGreen, rectModel);
+            gDrawPaint.DrawRectangle(penWhite, rectModel);
             gDrawPaint.DrawRectangle(penYellow, rectSearch);
             gDrawPaint.DrawRectangle(penDarkOrange, rectFind);
 
@@ -185,8 +185,7 @@ namespace WindowsFormsProjectGDAL
             gDraw.DrawImage(imagePaint, 0, 0);
             pictureBox1.Invalidate();
 
-            if (radioButton1.Checked) imagePaint = (Bitmap)imageOrigin.Clone();
-            if (radioButton2.Checked) imagePaint = (Bitmap)imageOriginGray.Clone();
+            imagePaint = (Bitmap)imageOrigin.Clone();
         }
 
         private void info(Rectangle rect)
@@ -282,23 +281,7 @@ namespace WindowsFormsProjectGDAL
                 }
             }
 
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            gDraw = Graphics.FromImage(pictureBox1.Image);
-            gDraw.DrawImage(imageOrigin, 0, 0);
-            pictureBox1.Invalidate();
-            drawImage();
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            gDraw = Graphics.FromImage(pictureBox1.Image);
-            gDraw.DrawImage(imageOriginGray, 0, 0);
-            pictureBox1.Invalidate();
-            drawImage();
-        }
+        }     
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -307,18 +290,18 @@ namespace WindowsFormsProjectGDAL
             int index;
             index = listBox1.SelectedIndex;
 
-            Stopwatch sWatch = new Stopwatch();
+            sWatch = new Stopwatch();
 
             switch (index)
             {
                 case 0:
-                    point = Correlator.classicNorm(color, imageOriginGray, Model.modelImage, rectSearch, progressBar1, sWatch);
+                    point = Correlator.classicNorm(colorImage, colorModel, imageOrigin, Model.modelImage, rectSearch, progressBar1, sWatch);
                     break;
                 case 1:
-                    point = Correlator.diffAbs(color, imageOriginGray, Model.modelImage, rectSearch, progressBar1, sWatch);
+                    point = Correlator.diffAbs(colorImage, colorModel, imageOrigin, Model.modelImage, rectSearch, progressBar1, sWatch);
                     break;
                 case 2:
-                    point = Correlator.diffSqr(color, imageOriginGray, Model.modelImage, rectSearch, progressBar1, sWatch);
+                    point = Correlator.diffSqr(colorImage, colorModel, imageOrigin, Model.modelImage, rectSearch, progressBar1, sWatch);
                     break;
                 default:
                     MessageBox.Show("Select correlations");
