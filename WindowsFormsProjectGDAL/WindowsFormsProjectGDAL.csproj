@@ -77,6 +77,7 @@
     <Compile Include="Model.Designer.cs">
       <DependentUpon>Model.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewImage.cs" />
     <Compile Include="OriganalImage.cs" />
     <Compile Include="Picture.cs">
       <SubType>Form</SubType>

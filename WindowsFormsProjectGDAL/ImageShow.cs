@@ -319,5 +319,19 @@ namespace WindowsFormsProjectGDAL
             }
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (colorImage == Colors.BLUE) NewImage.bluePoint = new Point(rectModel.X, rectModel.Y);
+            if (colorImage == Colors.GREEN) NewImage.greenPoint = new Point(rectModel.X, rectModel.Y);
+            if (colorImage == Colors.RED) NewImage.redPoint = new Point(rectModel.X, rectModel.Y);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (colorImage == Colors.BLUE) NewImage.bluePoint = new Point(rectFind.X, rectFind.Y);
+            if (colorImage == Colors.GREEN) NewImage.greenPoint = new Point(rectFind.X, rectFind.Y);
+            if (colorImage == Colors.RED) NewImage.redPoint = new Point(rectFind.X, rectFind.Y);
+        }
     }
 }

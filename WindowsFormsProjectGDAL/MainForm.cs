@@ -81,5 +81,11 @@ namespace WindowsFormsProjectGDAL
             Picture newForm = new Picture(orgImg.getRGBBitmap());
             newForm.Show();
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Picture newForm = new Picture(NewImage.getNewImage(orgImg.getBlueBitmap(), orgImg.getGreenBitmap(), orgImg.getRedBitmap()));
+            newForm.Show();
+        }
     }
 }
