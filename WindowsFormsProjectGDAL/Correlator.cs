@@ -73,7 +73,7 @@ namespace WindowsFormsProjectGDAL
         }
 
         //классическая корреляция с нормированием
-        public static Point classicNorm(Colors color, Colors colorModel, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch)
+        public static Point classicNorm(Colors color, Colors colorModel, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
         {
             Point point = new Point();
 
@@ -120,11 +120,12 @@ namespace WindowsFormsProjectGDAL
             }
             sWatch.Stop();
             progressBar1.Value = 0;
+            label23.Text = "max = " + Fmax.ToString();
             return point;
         }
 
         //разностная корреляция с модулем
-        public static Point diffAbs(Colors color, Colors colorModel, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch)
+        public static Point diffAbs(Colors color, Colors colorModel, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
         {
             Point point = new Point();
 
@@ -162,11 +163,12 @@ namespace WindowsFormsProjectGDAL
             }
             sWatch.Stop();
             progressBar1.Value = 0;
+            label23.Text = "min = " + Fmin.ToString();
             return point;
         }
 
         //разностная корреляция с квадратом
-        public static Point diffSqr(Colors color, Colors colorModel, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch)
+        public static Point diffSqr(Colors color, Colors colorModel, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
         {
             Point point = new Point();
 
@@ -205,6 +207,7 @@ namespace WindowsFormsProjectGDAL
             }
             sWatch.Stop();
             progressBar1.Value = 0;
+            label23.Text = "min = " + Fmin.ToString();
             return point;
         }
 

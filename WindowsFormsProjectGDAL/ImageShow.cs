@@ -295,13 +295,16 @@ namespace WindowsFormsProjectGDAL
             switch (index)
             {
                 case 0:
-                    point = Correlator.classicNorm(colorImage, colorModel, imageOrigin, Model.modelImage, rectSearch, progressBar1, sWatch);
+                    point = Correlator.classicNorm(colorImage, colorModel, imageOrigin, Model.modelImage,
+                        rectSearch, progressBar1, sWatch, label23);
                     break;
                 case 1:
-                    point = Correlator.diffAbs(colorImage, colorModel, imageOrigin, Model.modelImage, rectSearch, progressBar1, sWatch);
+                    point = Correlator.diffAbs(colorImage, colorModel, imageOrigin, Model.modelImage,
+                        rectSearch, progressBar1, sWatch, label23);
                     break;
                 case 2:
-                    point = Correlator.diffSqr(colorImage, colorModel, imageOrigin, Model.modelImage, rectSearch, progressBar1, sWatch);
+                    point = Correlator.diffSqr(colorImage, colorModel, imageOrigin, Model.modelImage,
+                        rectSearch, progressBar1, sWatch, label23);
                     break;
                 default:
                     MessageBox.Show("Select correlations");
@@ -314,8 +317,8 @@ namespace WindowsFormsProjectGDAL
                 drawImage();
                 label20.Text = "X1=" + point.X;
                 label19.Text = "Y1=" + point.Y;
-                MessageBox.Show("Rectangle found\n" + "Search time: " + 
-                    (((double) sWatch.ElapsedMilliseconds) / 1000).ToString() + " sec");
+                label24.Text = "time = " + (((double)sWatch.ElapsedMilliseconds) / 1000).ToString() + " sec";
+                MessageBox.Show("Rectangle found");
             }
 
         }

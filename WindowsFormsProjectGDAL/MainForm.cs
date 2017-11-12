@@ -17,7 +17,7 @@ namespace WindowsFormsProjectGDAL
 
     public partial class MainForm : Form
     {
-        private String filename = "C:/Users/Lenovo/Documents/Visual Studio 2015/Projects/WindowsFormsProjectGDAL/WindowsFormsProjectGDAL/resources/images/nature.jpg";
+        private String filename = "C:/Users/Lenovo/Documents/Visual Studio 2015/Projects/WindowsFormsProjectGDAL/WindowsFormsProjectGDAL/resources/images/1.jpg";
         private OriganalImage orgImg;
 
         private static Colors colorModel; 
