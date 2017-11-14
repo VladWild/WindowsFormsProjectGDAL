@@ -11,6 +11,13 @@ namespace WindowsFormsProjectGDAL
 {
     class Correlator
     {
+
+        private struct info
+        {
+            public double mean;
+            public double sko;
+        }
+
         private static Rectangle rectSearch;
         private static byte[,] searchByte;
         private static byte[,] modelByte;
@@ -211,26 +218,26 @@ namespace WindowsFormsProjectGDAL
             return point;
         }
 
-        //вычисление среднего арифметического значения яркости из фрагмента массива
-        private static double middle(byte [,] array, int i0, int j0, int Width, int Heigth)
+        //вычисление математического ожидания яркости из фрагмента массива
+        private static double mean(byte [,] array, int i0, int j0, int Width, int Heigth)
         {
-            double middle = 0;
+            double mean = 0;
             double n = Width * Heigth;
 
             for (int i = i0; i < i0 + Width; i++)
             {
                 for (int j = j0; j < j0 + Heigth; j++)
                 {
-                    middle += array[i, j]; 
+                    mean += array[i, j]; 
                 }
             }
-            middle /= n;
+            mean /= n;
 
-            return middle;
+            return mean;
         }
 
         //вычисление ско яркости фрагментов изображений
-        private static double sko(byte[,] array, int i0, int j0, int Width, int Heigth, double middle)
+        private static double sko(byte[,] array, int i0, int j0, int Width, int Heigth, double mean)
         {
             double sum = 0;
             double sko = 0;
@@ -240,7 +247,7 @@ namespace WindowsFormsProjectGDAL
             {
                 for (int j = j0; j < j0 + Heigth; j++)
                 {
-                    sum += Math.Pow(array[i, j] - middle, 2);
+                    sum += Math.Pow(array[i, j] - mean, 2);
                 }
             }
 
@@ -250,36 +257,45 @@ namespace WindowsFormsProjectGDAL
             return sko;
         }
 
-        private static double moSko(byte[,] array, int i0, int j0, int Width, int Heigth)
+        //вычисление математического ожидания и ско яркости из фрагментов массива
+        private static info meanSko(byte[,] array, int i0, int j0, int Width, int Heigth)
         {
+            info info;
+
             double sum = 0;
             double sko = 0;
-            double middle = 0;
+            double mean = 0;
             double n = Width * Heigth;
 
             for (int i = i0; i < i0 + Width; i++)
             {
                 for (int j = j0; j < j0 + Heigth; j++)
                 {
-                    middle += array[i, j];
-                    sum += Math.Pow(array[i, j], 2);
+                    mean += array[i, j];
+                    sum += array[i, j] * array[i, j];
                 }
             }
 
-            sko = (sum - middle* middle) / n;
+            mean /= n;
+            sko = sum / n - mean * mean;
             sko = Math.Pow(sko, 0.5);
-            middle /= n;
 
-            return sko;
+            info.mean = mean;
+            info.sko = sko;
+
+            return info;
         }
 
         //корреляция с нормированием new
-        public static Point normNew(Colors color, Colors colorModel, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
+        public static Point normCorrilation(Colors color, Colors colorModel, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
         {
             Point point = new Point();
 
             double F = 0;
             double Fmax = double.MinValue;
+
+            info infoModel;
+            info infoImage;
 
             rectSearch = getRectSearch(image, rect);
 
@@ -291,27 +307,23 @@ namespace WindowsFormsProjectGDAL
             sWatch.Start();
 
             double L = model.Width * model.Height;
-            double middleModel = middle(modelByte, 0, 0, model.Width, model.Height);
-            double skoModel = sko(modelByte, 0, 0, model.Width, model.Height, middleModel);
-            double middleImage = 0;
-            double skoImage = 0;
+            infoModel = meanSko(modelByte, 0, 0, model.Width, model.Height);
 
             for (int i = 0; i < rectSearch.Width - model.Width; i++)
             {
                 for (int j = 0; j < rectSearch.Height - model.Height; j++)
                 {
-                    middleImage = middle(searchByte, i, j, model.Width, model.Height);
-                    skoImage = sko(searchByte, i, j, model.Width, model.Height, middleImage);
+                    infoImage = meanSko(searchByte, i, j, model.Width, model.Height);
                     for (int i2 = 0; i2 < model.Width; i2++)
                     {
                         for (int j2 = 0; j2 < model.Height; j2++)
                         {
-                            F += modelByte[i2, j2] * searchByte[i + i2, j + j2];  //- middleModel * middleImage;
+                            F += modelByte[i2, j2] * searchByte[i + i2, j + j2];
                         }
                     }
                     F /= L;
-                    F -= middleModel * middleImage;
-                    F = F / (skoModel * skoImage);
+                    F -= infoModel.mean * infoImage.mean;
+                    F = F / (infoModel.sko * infoImage.sko);
                     if (F > Fmax)
                     {
                         Fmax = F;
@@ -319,8 +331,8 @@ namespace WindowsFormsProjectGDAL
                         point.Y = rectSearch.Y + j;
                     }
                     F = 0;
-                    middleImage = 0;
-                    skoImage = 0;
+                    infoImage.mean = 0;
+                    infoImage.sko = 0;
                 }
                 ++progressBar1.Value;
             }

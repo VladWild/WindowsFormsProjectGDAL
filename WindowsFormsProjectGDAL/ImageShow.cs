@@ -307,7 +307,7 @@ namespace WindowsFormsProjectGDAL
                         rectSearch, progressBar1, sWatch, label23);
                     break;
                 case 3:
-                    point = Correlator.normNew(colorImage, colorModel, imageOrigin, Model.modelImage,
+                    point = Correlator.normCorrilation(colorImage, colorModel, imageOrigin, Model.modelImage,
                         rectSearch, progressBar1, sWatch, label23);
                     break;
                 default:
