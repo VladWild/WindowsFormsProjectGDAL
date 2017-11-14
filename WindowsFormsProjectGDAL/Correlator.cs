@@ -211,5 +211,125 @@ namespace WindowsFormsProjectGDAL
             return point;
         }
 
+        //вычисление среднего арифметического значения яркости из фрагмента массива
+        private static double middle(byte [,] array, int i0, int j0, int Width, int Heigth)
+        {
+            double middle = 0;
+            double n = Width * Heigth;
+
+            for (int i = i0; i < i0 + Width; i++)
+            {
+                for (int j = j0; j < j0 + Heigth; j++)
+                {
+                    middle += array[i, j]; 
+                }
+            }
+            middle /= n;
+
+            return middle;
+        }
+
+        //вычисление ско яркости фрагментов изображений
+        private static double sko(byte[,] array, int i0, int j0, int Width, int Heigth, double middle)
+        {
+            double sum = 0;
+            double sko = 0;
+            double n = Width * Heigth - 1;
+
+            for (int i = i0; i < i0 + Width; i++)
+            {
+                for (int j = j0; j < j0 + Heigth; j++)
+                {
+                    sum += Math.Pow(array[i, j] - middle, 2);
+                }
+            }
+
+            sko = sum / n;
+            sko = Math.Pow(sko, 0.5);
+
+            return sko;
+        }
+
+        private static double moSko(byte[,] array, int i0, int j0, int Width, int Heigth)
+        {
+            double sum = 0;
+            double sko = 0;
+            double middle = 0;
+            double n = Width * Heigth;
+
+            for (int i = i0; i < i0 + Width; i++)
+            {
+                for (int j = j0; j < j0 + Heigth; j++)
+                {
+                    middle += array[i, j];
+                    sum += Math.Pow(array[i, j], 2);
+                }
+            }
+
+            sko = (sum - middle* middle) / n;
+            sko = Math.Pow(sko, 0.5);
+            middle /= n;
+
+            return sko;
+        }
+
+        //корреляция с нормированием new
+        public static Point normNew(Colors color, Colors colorModel, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
+        {
+            Point point = new Point();
+
+            double F = 0;
+            double Fmax = double.MinValue;
+
+            rectSearch = getRectSearch(image, rect);
+
+            getSearchByteArray(color, image, rect);
+            getModelByteArray(colorModel, model, rect);
+
+            setingProgressBar(progressBar1, model);
+
+            sWatch.Start();
+
+            double L = model.Width * model.Height;
+            double middleModel = middle(modelByte, 0, 0, model.Width, model.Height);
+            double skoModel = sko(modelByte, 0, 0, model.Width, model.Height, middleModel);
+            double middleImage = 0;
+            double skoImage = 0;
+
+            for (int i = 0; i < rectSearch.Width - model.Width; i++)
+            {
+                for (int j = 0; j < rectSearch.Height - model.Height; j++)
+                {
+                    middleImage = middle(searchByte, i, j, model.Width, model.Height);
+                    skoImage = sko(searchByte, i, j, model.Width, model.Height, middleImage);
+                    for (int i2 = 0; i2 < model.Width; i2++)
+                    {
+                        for (int j2 = 0; j2 < model.Height; j2++)
+                        {
+                            F += modelByte[i2, j2] * searchByte[i + i2, j + j2];  //- middleModel * middleImage;
+                        }
+                    }
+                    F /= L;
+                    F -= middleModel * middleImage;
+                    F = F / (skoModel * skoImage);
+                    if (F > Fmax)
+                    {
+                        Fmax = F;
+                        point.X = rectSearch.X + i;
+                        point.Y = rectSearch.Y + j;
+                    }
+                    F = 0;
+                    middleImage = 0;
+                    skoImage = 0;
+                }
+                ++progressBar1.Value;
+            }
+            sWatch.Stop();
+            progressBar1.Value = 0;
+            label23.Text = "max = " + Fmax.ToString();
+            return point;
+        }
+
     }
+
 }

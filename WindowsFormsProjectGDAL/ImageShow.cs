@@ -128,7 +128,7 @@ namespace WindowsFormsProjectGDAL
         {
             colorModel = colorImage;
 
-            modelImage = new Bitmap(rect.Width + 1, rect.Height + 1);
+            modelImage = new Bitmap(rect.Width, rect.Height);
 
             int i2 = 0;
             int j2 = 0;
@@ -304,6 +304,10 @@ namespace WindowsFormsProjectGDAL
                     break;
                 case 2:
                     point = Correlator.diffSqr(colorImage, colorModel, imageOrigin, Model.modelImage,
+                        rectSearch, progressBar1, sWatch, label23);
+                    break;
+                case 3:
+                    point = Correlator.normNew(colorImage, colorModel, imageOrigin, Model.modelImage,
                         rectSearch, progressBar1, sWatch, label23);
                     break;
                 default:

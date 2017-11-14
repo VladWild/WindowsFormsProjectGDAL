@@ -1,0 +1,15 @@
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\bin\Release\WindowsFormsProjectGDAL.exe.config
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\bin\Release\WindowsFormsProjectGDAL.exe
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\bin\Release\WindowsFormsProjectGDAL.pdb
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\bin\Release\gdalconst_csharp.dll
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\bin\Release\gdal_csharp.dll
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\bin\Release\ogr_csharp.dll
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\bin\Release\osr_csharp.dll
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Release\WindowsFormsProjectGDAL.MainForm.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Release\WindowsFormsProjectGDAL.PictureShow.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Release\WindowsFormsProjectGDAL.Model.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Release\WindowsFormsProjectGDAL.Picture.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Release\WindowsFormsProjectGDAL.Properties.Resources.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Release\WindowsFormsProjectGDAL.csproj.GenerateResource.Cache
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Release\WindowsFormsProjectGDAL.exe
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Release\WindowsFormsProjectGDAL.pdb
