@@ -31,23 +31,23 @@ namespace WindowsFormsProjectGDAL
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Picture newForm;
+            AffineTransformationForm newForm;
 
             switch (listBox1.SelectedIndex)
             {
                 case 0:
                     pyramidImage.decimationPixels(Convert.ToInt32(textBox1.Text), progressBar1);
-                    newForm = new Picture(pyramidImage.getPyramidDecimation());
+                    newForm = new AffineTransformationForm(pyramidImage.getPyramidDecimation());
                     newForm.Show();
                     break;
                 case 1:
                     pyramidImage.avaregingPixels(Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox4.Text), progressBar1);
-                    newForm = new Picture(pyramidImage.getPyramidAvareging());
+                    newForm = new AffineTransformationForm(pyramidImage.getPyramidAvareging());
                     newForm.Show();
                     break;
                 case 2:
                     pyramidImage.gaussianFilter(Convert.ToInt32(textBox2.Text), trackBar2.Value * 2 + 1, Convert.ToDouble(label17.Text),  progressBar1);
-                    newForm = new Picture(pyramidImage.getPyramidGaussian());
+                    newForm = new AffineTransformationForm(pyramidImage.getPyramidGaussian());
                     newForm.Show();
                     break;
                 default:

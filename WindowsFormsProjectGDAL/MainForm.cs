@@ -93,5 +93,11 @@ namespace WindowsFormsProjectGDAL
             PictureSettingsPyramid newForm = new PictureSettingsPyramid(orgImg.getRGBBitmap());
             newForm.Show();
         }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            AffineTransformationForm newForm = new AffineTransformationForm(orgImg.getRGBBitmap());
+            newForm.Show();
+        }
     }
 }

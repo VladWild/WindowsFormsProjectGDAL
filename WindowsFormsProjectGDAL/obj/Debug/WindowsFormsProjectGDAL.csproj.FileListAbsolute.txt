@@ -45,3 +45,22 @@ C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\Wi
 C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.Model.resources
 C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.Picture.resources
 C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.PictureSettingsPyramid.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.AffineTransformationForm.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\bin\Debug\WindowsFormsProjectGDAL.exe.config
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.exe
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.pdb
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.csprojResolveAssemblyReference.cache
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.AffineTransformationForm.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.MainForm.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.PictureShow.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.Model.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.Picture.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.PictureSettingsPyramid.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.csproj.GenerateResource.Cache
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\bin\Debug\WindowsFormsProjectGDAL.exe
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\bin\Debug\WindowsFormsProjectGDAL.pdb
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\bin\Debug\gdalconst_csharp.dll
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\bin\Debug\gdal_csharp.dll
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\bin\Debug\ogr_csharp.dll
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\bin\Debug\osr_csharp.dll
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.Properties.Resources.resources

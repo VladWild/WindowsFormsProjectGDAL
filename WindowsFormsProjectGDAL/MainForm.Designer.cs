@@ -42,8 +42,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
             this.button8 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button9 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -177,12 +178,23 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.panel2.Controls.Add(this.button9);
             this.panel2.Controls.Add(this.button8);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Location = new System.Drawing.Point(12, 134);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(890, 113);
             this.panel2.TabIndex = 12;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(18, 41);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(158, 52);
+            this.button8.TabIndex = 2;
+            this.button8.Text = "Pyramid Setting";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // label4
             // 
@@ -193,15 +205,15 @@
             this.label4.TabIndex = 1;
             this.label4.Text = "Estimation of the accuracy of algorithms";
             // 
-            // button8
+            // button9
             // 
-            this.button8.Location = new System.Drawing.Point(18, 41);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(158, 52);
-            this.button8.TabIndex = 2;
-            this.button8.Text = "Show Original Image";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.button9.Location = new System.Drawing.Point(192, 41);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(158, 52);
+            this.button9.TabIndex = 3;
+            this.button9.Text = "Affine transformations";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // MainForm
             // 
@@ -245,6 +257,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
     }
 }
 
