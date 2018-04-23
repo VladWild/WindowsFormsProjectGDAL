@@ -22,6 +22,9 @@ namespace WindowsFormsProjectGDAL
         private static byte[,] searchByte;
         private static byte[,] modelByte;
 
+        private static double[,] function;
+        private static Point pointPosition = new Point();
+
         //возвращает прямоугольник области поиска
         private static Rectangle getRectSearch(Bitmap image, Rectangle rect)
         {
@@ -79,163 +82,6 @@ namespace WindowsFormsProjectGDAL
             progressBar1.Value = 0;
         }
 
-        //классическая корреляция с нормированием
-        public static Point classicNorm(Colors color, Colors colorModel, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
-        {
-            Point point = new Point();
-
-            double F = 0;
-            double F2 = 0;
-            double F3 = 0;
-            double F4 = 0;
-            double Fmax = double.MinValue;
-
-            rectSearch = getRectSearch(image, rect);
-
-            getSearchByteArray(color, image, rect);
-            getModelByteArray(colorModel, model, rect);
-
-            setingProgressBar(progressBar1, model);
-
-            sWatch.Start();
-            for (int i = 0; i < rectSearch.Width - model.Width; i++)
-            {
-                for (int j = 0; j < rectSearch.Height - model.Height; j++)
-                {
-                    for (int i2 = 0; i2 < model.Width; i2++)
-                    {
-                        for (int j2 = 0; j2 < model.Height; j2++)
-                        {
-                            F2 += modelByte[i2, j2] * searchByte[i + i2, j + j2];
-                            F3 += modelByte[i2, j2] * modelByte[i2, j2];
-                            F4 += searchByte[i + i2, j + j2] * searchByte[i + i2, j + j2];
-                        }
-                    }
-                    F = F2 / (Math.Pow(F3, 0.5) * Math.Pow(F4, 0.5));
-                    if (F > Fmax)
-                    {
-                        Fmax = F;
-                        point.X = rectSearch.X + i;
-                        point.Y = rectSearch.Y + j;
-                    }
-                    F = 0;
-                    F2 = 0;
-                    F3 = 0;
-                    F4 = 0;
-                }
-                ++progressBar1.Value;
-            }
-            sWatch.Stop();
-            progressBar1.Value = 0;
-            label23.Text = "max = " + Fmax.ToString();
-            return point;
-        }
-
-        //разностная корреляция с модулем
-        public static Point diffAbs(Colors color, Colors colorModel, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
-        {
-            Point point = new Point();
-
-            double F = 0;
-            double Fmin = double.MaxValue;
-
-            rectSearch = getRectSearch(image, rect);
-
-            getSearchByteArray(color, image, rect);
-            getModelByteArray(colorModel, model, rect);
-
-            setingProgressBar(progressBar1, model);
-
-            sWatch.Start();
-            for (int i = 0; i < rectSearch.Width - model.Width; i++)
-            {
-                for (int j = 0; j < rectSearch.Height - model.Height; j++)
-                {
-                    for (int i2 = 0; i2 < model.Width; i2++)
-                    {
-                        for (int j2 = 0; j2 < model.Height; j2++)
-                        {
-                            F += Math.Abs(searchByte[i + i2, j + j2] - modelByte[i2, j2]);
-                        }
-                    }
-                    if (F < Fmin)
-                    {
-                        Fmin = F;
-                        point.X = rectSearch.X + i;
-                        point.Y = rectSearch.Y + j;
-                    }
-                    F = 0;
-                }
-                ++progressBar1.Value;
-            }
-            sWatch.Stop();
-            progressBar1.Value = 0;
-            label23.Text = "min = " + Fmin.ToString();
-            return point;
-        }
-
-        //разностная корреляция с квадратом
-        public static Point diffSqr(Colors color, Colors colorModel, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
-        {
-            Point point = new Point();
-
-            double F = 0;
-            double Fmin = double.MaxValue;
-
-            rectSearch = getRectSearch(image, rect);
-
-            getSearchByteArray(color, image, rect);
-            getModelByteArray(colorModel, model, rect);
-
-            setingProgressBar(progressBar1, model);
-
-            sWatch.Start();
-            for (int i = 0; i < rectSearch.Width - model.Width; i++)
-            {
-                for (int j = 0; j < rectSearch.Height - model.Height; j++)
-                {
-                    for (int i2 = 0; i2 < model.Width; i2++)
-                    {
-                        for (int j2 = 0; j2 < model.Height; j2++)
-                        {
-                            F += (searchByte[i + i2, j + j2] - modelByte[i2, j2]) * 
-                                (searchByte[i + i2, j + j2] - modelByte[i2, j2]);
-                        }
-                    }
-                    if (F < Fmin)
-                    {
-                        Fmin = F;
-                        point.X = rectSearch.X + i;
-                        point.Y = rectSearch.Y + j;
-                    }
-                    F = 0;
-                }
-                ++progressBar1.Value;
-            }
-            sWatch.Stop();
-            progressBar1.Value = 0;
-            label23.Text = "min = " + Fmin.ToString();
-            return point;
-        }
-
-        //вычисление математического ожидания яркости из фрагмента массива
-        private static double mean(byte [,] array, int i0, int j0, int Width, int Heigth)
-        {
-            double mean = 0;
-            double n = Width * Heigth;
-
-            for (int i = i0; i < i0 + Width; i++)
-            {
-                for (int j = j0; j < j0 + Heigth; j++)
-                {
-                    mean += array[i, j]; 
-                }
-            }
-            mean /= n;
-
-            return mean;
-        }
-
         //вычисление ско яркости фрагментов изображений
         private static double sko(byte[,] array, int i0, int j0, int Width, int Heigth, double mean)
         {
@@ -286,9 +132,190 @@ namespace WindowsFormsProjectGDAL
             return info;
         }
 
-        //корреляция с нормированием new
-        public static Point normCorrilation(Colors color, Colors colorModel, Bitmap image, Bitmap model, Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
+        //классическая корреляция с нормированием
+        public static Point classicNorm(Colors color, Colors colorModel, Bitmap image, Bitmap model, 
+            Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
         {
+            function = new double[image.Width - model.Width, image.Height - model.Width];   //массив значений корреляционной функции
+            List<double> list = new List<double>();     //временно
+
+            Point point = new Point();
+
+            double F = 0;
+            double F2 = 0;
+            double F3 = 0;
+            double F4 = 0;
+            double Fmax = double.MinValue;
+
+            rectSearch = getRectSearch(image, rect);
+
+            getSearchByteArray(color, image, rect);
+            getModelByteArray(colorModel, model, rect);
+
+            setingProgressBar(progressBar1, model);
+
+            sWatch.Start();
+            for (int i = 0; i < rectSearch.Width - model.Width; i++)
+            {
+                for (int j = 0; j < rectSearch.Height - model.Height; j++)
+                {
+                    for (int i2 = 0; i2 < model.Width; i2++)
+                    {
+                        for (int j2 = 0; j2 < model.Height; j2++)
+                        {
+                            F2 += modelByte[i2, j2] * searchByte[i + i2, j + j2];
+                            F3 += modelByte[i2, j2] * modelByte[i2, j2];
+                            F4 += searchByte[i + i2, j + j2] * searchByte[i + i2, j + j2];
+                        }
+                    }
+                    F = F2 / (Math.Pow(F3, 0.5) * Math.Pow(F4, 0.5));
+                    function[i, j] = F;     //корреляционная функция
+                    list.Add(F);    //временно
+                    if (F > Fmax)
+                    {
+                        Fmax = F;
+                        point.X = rectSearch.X + i;
+                        point.Y = rectSearch.Y + j;
+                        pointPosition.X = j;        //положение x - максимума в корреляционной функции
+                        pointPosition.Y = i;        //положение y - максимума в корреляционной функции
+                    }
+                    F = 0;
+                    F2 = 0;
+                    F3 = 0;
+                    F4 = 0;
+                }
+                ++progressBar1.Value;
+            }
+            sWatch.Stop();
+            progressBar1.Value = 0;
+            label23.Text = "max = " + Fmax.ToString();
+            list.Clear();
+            return point;
+        }
+
+        //разностная корреляция с модулем
+        public static Point diffAbs(Colors color, Colors colorModel, Bitmap image, Bitmap model, 
+            Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
+        {
+            function = new double[image.Width - model.Width, image.Height - model.Width];   //массив значений корреляционной функции
+
+            Point point = new Point();
+
+            double F = 0;
+            double Fmin = double.MaxValue;
+
+            rectSearch = getRectSearch(image, rect);
+
+            getSearchByteArray(color, image, rect);
+            getModelByteArray(colorModel, model, rect);
+
+            setingProgressBar(progressBar1, model);
+
+            sWatch.Start();
+            for (int i = 0; i < rectSearch.Width - model.Width; i++)
+            {
+                for (int j = 0; j < rectSearch.Height - model.Height; j++)
+                {
+                    for (int i2 = 0; i2 < model.Width; i2++)
+                    {
+                        for (int j2 = 0; j2 < model.Height; j2++)
+                        {
+                            F += Math.Abs(searchByte[i + i2, j + j2] - modelByte[i2, j2]);
+                        }
+                    }
+                    function[i, j] = F;     //корреляционная функция
+                    if (F < Fmin)
+                    {
+                        Fmin = F;
+                        point.X = rectSearch.X + i;
+                        point.Y = rectSearch.Y + j;
+                        pointPosition.X = j;        //положение x - минимума в корреляционной функции
+                        pointPosition.Y = i;        //положение y - минимума в корреляционной функции
+                    }
+                    F = 0;
+                }
+                ++progressBar1.Value;
+            }
+            sWatch.Stop();
+            progressBar1.Value = 0;
+            label23.Text = "min = " + Fmin.ToString();
+            return point;
+        }
+
+        //разностная корреляция с квадратом
+        public static Point diffSqr(Colors color, Colors colorModel, Bitmap image, Bitmap model, 
+            Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
+        {
+            function = new double[image.Width - model.Width, image.Height - model.Width];   //массив значений корреляционной функции
+
+            Point point = new Point();
+
+            double F = 0;
+            double Fmin = double.MaxValue;
+
+            rectSearch = getRectSearch(image, rect);
+
+            getSearchByteArray(color, image, rect);
+            getModelByteArray(colorModel, model, rect);
+
+            setingProgressBar(progressBar1, model);
+
+            sWatch.Start();
+            for (int i = 0; i < rectSearch.Width - model.Width; i++)
+            {
+                for (int j = 0; j < rectSearch.Height - model.Height; j++)
+                {
+                    for (int i2 = 0; i2 < model.Width; i2++)
+                    {
+                        for (int j2 = 0; j2 < model.Height; j2++)
+                        {
+                            F += (searchByte[i + i2, j + j2] - modelByte[i2, j2]) * 
+                                (searchByte[i + i2, j + j2] - modelByte[i2, j2]);
+                        }
+                    }
+                    function[i, j] = F;     //корреляционная функция
+                    if (F < Fmin)
+                    {
+                        Fmin = F;
+                        point.X = rectSearch.X + i;
+                        point.Y = rectSearch.Y + j;
+                        pointPosition.X = j;        //положение x - минимума в корреляционной функции
+                        pointPosition.Y = i;        //положение y - минимума в корреляционной функции
+                    }
+                    F = 0;
+                }
+                ++progressBar1.Value;
+            }
+            sWatch.Stop();
+            progressBar1.Value = 0;
+            label23.Text = "min = " + Fmin.ToString();
+            return point;
+        }
+
+        //вычисление математического ожидания яркости из фрагмента массива
+        private static double mean(byte [,] array, int i0, int j0, int Width, int Heigth)
+        {
+            double mean = 0;
+            double n = Width * Heigth;
+
+            for (int i = i0; i < i0 + Width; i++)
+            {
+                for (int j = j0; j < j0 + Heigth; j++)
+                {
+                    mean += array[i, j]; 
+                }
+            }
+            mean /= n;
+
+            return mean;
+        }
+
+        //корреляция с нормированием new
+        public static Point normCorrilation(Colors color, Colors colorModel, Bitmap image, Bitmap model, 
+            Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
+        {
+            function = new double[image.Width - model.Width, image.Height - model.Width];   //массив значений корреляционной функции
+
             Point point = new Point();
 
             double F = 0;
@@ -324,11 +351,14 @@ namespace WindowsFormsProjectGDAL
                     F /= L;
                     F -= infoModel.mean * infoImage.mean;
                     F = F / (infoModel.sko * infoImage.sko);
+                    function[i, j] = F;     //корреляционная функция
                     if (F > Fmax)
                     {
                         Fmax = F;
                         point.X = rectSearch.X + i;
                         point.Y = rectSearch.Y + j;
+                        pointPosition.X = j;        //положение x - максимума в корреляционной функции
+                        pointPosition.Y = i;        //положение y - максимума в корреляционной функции
                     }
                     F = 0;
                     infoImage.mean = 0;
@@ -342,6 +372,47 @@ namespace WindowsFormsProjectGDAL
             return point;
         }
 
+        public static MyPoint getPointSubShiftMax()
+        {
+            MyPoint myPoint = new MyPoint();
+
+            double a1x = 0.5d * (function[pointPosition.Y, pointPosition.X + 1] - 
+                function[pointPosition.Y, pointPosition.X - 1]);
+            double a2x = 0.5d * (function[pointPosition.Y, pointPosition.X + 1] +
+                function[pointPosition.Y, pointPosition.X - 1]);
+
+            myPoint.x = 0.5d * (a1x / a2x);
+
+            double a1y = 0.5d * (function[pointPosition.Y + 1, pointPosition.X] -
+                function[pointPosition.Y - 1, pointPosition.X]);
+            double a2y = 0.5d * (function[pointPosition.Y + 1, pointPosition.X] +
+                function[pointPosition.Y - 1, pointPosition.X]);
+
+            myPoint.y = 0.5d * (a1y / a2y);
+
+            return myPoint;
+        }
+
+        public static MyPoint getPointSubShiftMin()
+        {
+            MyPoint myPoint = new MyPoint();
+
+            double a1x = 0.5d * (function[pointPosition.Y, pointPosition.X + 1] -
+                function[pointPosition.Y, pointPosition.X - 1]);
+            double a2x = 0.5d * (function[pointPosition.Y, pointPosition.X + 1] +
+                function[pointPosition.Y, pointPosition.X - 1]);
+
+            myPoint.x = - 0.5d * (a1x / a2x);
+
+            double a1y = 0.5d * (function[pointPosition.Y + 1, pointPosition.X] -
+                function[pointPosition.Y - 1, pointPosition.X]);
+            double a2y = 0.5d * (function[pointPosition.Y + 1, pointPosition.X] +
+                function[pointPosition.Y - 1, pointPosition.X]);
+
+            myPoint.y = - 0.5d * (a1y / a2y);
+
+            return myPoint;
+        }
     }
 
 }

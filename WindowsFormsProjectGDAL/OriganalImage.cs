@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 
 namespace WindowsFormsProjectGDAL
 {
-    class OriganalImage
+    public class OriganalImage
     {
         private const int numberImages = 4;
 
@@ -68,6 +68,24 @@ namespace WindowsFormsProjectGDAL
             progressBar1.Value = 0;
 
         }
+
+        public OriganalImage(Bitmap image, ProgressBar progressBar1)
+        {
+            width = image.Width;
+            height = image.Height;
+
+            progressBar1.Maximum = image.Width * image.Height;
+
+            copyBlueBitmap(image, progressBar1);
+            copyGreenBitmap(image, progressBar1);
+            copyRedBitmap(image, progressBar1);
+            copyRGBBitmap(image);
+
+            progressBar1.Value = 0;
+        }
+
+        //методы для 1 конструктора
+        //--------------------------------------------------------------------------------
 
         private void createBlueBitmap(ProgressBar progressBar1)
         {
@@ -135,6 +153,62 @@ namespace WindowsFormsProjectGDAL
                 progressBar1.Value += 1;
             }
         }
+
+        //методы для 2 конструктора
+        //-----------------------------------------------------------------------------------
+
+        private void copyBlueBitmap(Bitmap image, ProgressBar progressBar1)
+        {
+            blueBitmap = new Bitmap(width, height);
+
+            for (var i = 0; i < blueBitmap.Height; i++)
+            {
+                for (var j = 0; j < blueBitmap.Width; j++)
+                {
+                    blueBitmap.SetPixel(j, i, Color.FromArgb(255, 0, 0,
+                        (int) ((UInt32)(image.GetPixel(j, i).ToArgb()) & 0x000000FF)));
+                }
+                progressBar1.Value += 1;
+            }
+        }
+
+        private void copyGreenBitmap(Bitmap image, ProgressBar progressBar1)
+        {
+            greenBitmap = new Bitmap(width, height);
+
+            for (var i = 0; i < greenBitmap.Height; i++)
+            {
+                for (var j = 0; j < greenBitmap.Width; j++)
+                {
+                    greenBitmap.SetPixel(j, i, Color.FromArgb(255, 0, 
+                        (int) (((UInt32)(image.GetPixel(j, i).ToArgb()) & 0x0000FF00) >> 8), 0));
+                }
+                progressBar1.Value += 1;
+            }
+        }
+
+        private void copyRedBitmap(Bitmap image, ProgressBar progressBar1)
+        {
+            redBitmap = new Bitmap(width, height);
+
+            for (var i = 0; i < redBitmap.Height; i++)
+            {
+                for (var j = 0; j < redBitmap.Width; j++)
+                {
+                    redBitmap.SetPixel(j, i, Color.FromArgb(255, 
+                        (int) (((UInt32)(image.GetPixel(j, i).ToArgb()) & 0x00FF0000) >> 16), 0, 0));
+                }
+                progressBar1.Value += 1;
+            }
+        }
+
+        private void copyRGBBitmap(Bitmap image)
+        {
+            rgbBitmap = (Bitmap) image.Clone();
+        }
+
+        //получение изображения и его каналов
+        //--------------------------------------------------------------------------------
 
         public Bitmap getBlueBitmap()
         {

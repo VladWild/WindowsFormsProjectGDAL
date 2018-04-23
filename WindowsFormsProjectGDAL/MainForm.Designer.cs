@@ -42,9 +42,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -178,6 +179,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.panel2.Controls.Add(this.button10);
             this.panel2.Controls.Add(this.button9);
             this.panel2.Controls.Add(this.button8);
             this.panel2.Controls.Add(this.label4);
@@ -185,6 +187,16 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(890, 113);
             this.panel2.TabIndex = 12;
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(192, 41);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(158, 52);
+            this.button9.TabIndex = 3;
+            this.button9.Text = "Affine transformations";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button8
             // 
@@ -205,15 +217,15 @@
             this.label4.TabIndex = 1;
             this.label4.Text = "Estimation of the accuracy of algorithms";
             // 
-            // button9
+            // button10
             // 
-            this.button9.Location = new System.Drawing.Point(192, 41);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(158, 52);
-            this.button9.TabIndex = 3;
-            this.button9.Text = "Affine transformations";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
+            this.button10.Location = new System.Drawing.Point(382, 41);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(145, 52);
+            this.button10.TabIndex = 4;
+            this.button10.Text = "button10";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // MainForm
             // 
@@ -258,6 +270,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
     }
 }
 

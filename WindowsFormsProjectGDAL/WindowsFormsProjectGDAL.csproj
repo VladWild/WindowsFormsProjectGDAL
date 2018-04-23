@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccuracyAlgorithmsCorrelation.cs" />
     <Compile Include="AffineTransformation.cs" />
     <Compile Include="AffineTransformationForm.cs">
       <SubType>Form</SubType>
@@ -66,6 +67,14 @@
       <DependentUpon>AffineTransformationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Correlator.cs" />
+    <Compile Include="AccuracyAlgorithms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccuracyAlgorithms.Designer.cs">
+      <DependentUpon>AccuracyAlgorithms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data.cs" />
+    <Compile Include="Info.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +93,7 @@
     <Compile Include="Model.Designer.cs">
       <DependentUpon>Model.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyPoint.cs" />
     <Compile Include="NewImage.cs" />
     <Compile Include="OriganalImage.cs" />
     <Compile Include="Picture.cs">
@@ -103,6 +113,9 @@
     <Compile Include="PyramidImage.cs" />
     <EmbeddedResource Include="AffineTransformationForm.resx">
       <DependentUpon>AffineTransformationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AccuracyAlgorithms.resx">
+      <DependentUpon>AccuracyAlgorithms.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

@@ -64,3 +64,4 @@ C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\
 C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\bin\Debug\ogr_csharp.dll
 C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\bin\Debug\osr_csharp.dll
 C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL 2\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.Properties.Resources.resources
+C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\WindowsFormsProjectGDAL\WindowsFormsProjectGDAL\obj\Debug\WindowsFormsProjectGDAL.AccuracyAlgorithms.resources

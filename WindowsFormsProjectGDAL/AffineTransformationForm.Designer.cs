@@ -48,6 +48,7 @@ namespace WindowsFormsProjectGDAL
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label20 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -76,6 +77,7 @@ namespace WindowsFormsProjectGDAL
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.textBox6);
             this.panel2.Controls.Add(this.textBox5);
             this.panel2.Controls.Add(this.textBox4);
@@ -98,7 +100,7 @@ namespace WindowsFormsProjectGDAL
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(30, 20);
             this.textBox6.TabIndex = 31;
-            this.textBox6.Text = "1,2";
+            this.textBox6.Text = "1,05";
             // 
             // textBox5
             // 
@@ -106,7 +108,7 @@ namespace WindowsFormsProjectGDAL
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(30, 20);
             this.textBox5.TabIndex = 30;
-            this.textBox5.Text = "0,2";
+            this.textBox5.Text = "0,05";
             // 
             // textBox4
             // 
@@ -114,7 +116,7 @@ namespace WindowsFormsProjectGDAL
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(30, 20);
             this.textBox4.TabIndex = 29;
-            this.textBox4.Text = "0,2";
+            this.textBox4.Text = "0,05";
             // 
             // textBox3
             // 
@@ -122,7 +124,7 @@ namespace WindowsFormsProjectGDAL
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(30, 20);
             this.textBox3.TabIndex = 28;
-            this.textBox3.Text = "1,2";
+            this.textBox3.Text = "1,05";
             // 
             // textBox2
             // 
@@ -169,11 +171,11 @@ namespace WindowsFormsProjectGDAL
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(43, 277);
+            this.button1.Location = new System.Drawing.Point(45, 249);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(276, 35);
             this.button1.TabIndex = 14;
-            this.button1.Text = "Transform";
+            this.button1.Text = "Show";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -221,6 +223,16 @@ namespace WindowsFormsProjectGDAL
             this.label20.TabIndex = 0;
             this.label20.Text = "Methods for obtaining coordinates in a general form:";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(45, 294);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(276, 35);
+            this.button2.TabIndex = 32;
+            this.button2.Text = "Accurery of correlation algorithms";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // AffineTransformationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -262,5 +274,6 @@ namespace WindowsFormsProjectGDAL
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button2;
     }
 }
