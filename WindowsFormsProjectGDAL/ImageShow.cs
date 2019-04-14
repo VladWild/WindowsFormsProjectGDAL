@@ -340,5 +340,10 @@ namespace WindowsFormsProjectGDAL
             if (colorImage == Colors.GREEN) NewImage.greenPoint = new Point(rectFind.X, rectFind.Y);
             if (colorImage == Colors.RED) NewImage.redPoint = new Point(rectFind.X, rectFind.Y);
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Picture.saveImage(this.pictureBox1);
+        }
     }
 }

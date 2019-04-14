@@ -69,6 +69,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.button1 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -86,7 +87,7 @@
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(606, 407);
+            this.panel1.Size = new System.Drawing.Size(638, 407);
             this.panel1.TabIndex = 1;
             // 
             // pictureBox1
@@ -105,6 +106,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.panel2.Controls.Add(this.button4);
             this.panel2.Controls.Add(this.button3);
             this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.panel3);
@@ -119,14 +121,14 @@
             this.panel2.Controls.Add(this.button1);
             this.panel2.Location = new System.Drawing.Point(0, 413);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(606, 169);
+            this.panel2.Size = new System.Drawing.Size(638, 169);
             this.panel2.TabIndex = 3;
             // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(405, 123);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(198, 39);
+            this.button3.Size = new System.Drawing.Size(134, 39);
             this.button3.TabIndex = 19;
             this.button3.Text = "Сохранить координаты найденного фрагмента";
             this.button3.UseVisualStyleBackColor = true;
@@ -136,7 +138,7 @@
             // 
             this.button2.Location = new System.Drawing.Point(405, 88);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(198, 35);
+            this.button2.Size = new System.Drawing.Size(134, 35);
             this.button2.TabIndex = 18;
             this.button2.Text = "Сохранить координаты выделеной модели";
             this.button2.UseVisualStyleBackColor = true;
@@ -204,7 +206,7 @@
             "Норм. взаим. кор. функ."});
             this.listBox1.Location = new System.Drawing.Point(456, 24);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(144, 56);
+            this.listBox1.Size = new System.Drawing.Size(179, 56);
             this.listBox1.TabIndex = 14;
             // 
             // panel7
@@ -224,7 +226,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(3, 43);
+            this.label25.Location = new System.Drawing.Point(-1, 43);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(38, 13);
             this.label25.TabIndex = 10;
@@ -500,11 +502,21 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(545, 90);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(90, 72);
+            this.button4.TabIndex = 2;
+            this.button4.Text = "Сохранить изображение";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // PictureShow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(606, 584);
+            this.ClientSize = new System.Drawing.Size(639, 584);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "PictureShow";
@@ -572,5 +584,6 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Button button4;
     }
 }
