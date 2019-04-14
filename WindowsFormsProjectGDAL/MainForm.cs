@@ -39,7 +39,7 @@ namespace WindowsFormsProjectGDAL
             Gdal.AllRegister();     //регистрация драйверов для доступа к растровым данным
             Ogr.RegisterAll();      //регистрирует драйвера доступа в векторным данным
 
-            label1.Text = "Library version:\n" + Gdal.VersionInfo("");
+            label1.Text = "Версия библиотеки:\n" + Gdal.VersionInfo("");
 
             progressBar1.Minimum = 0;
 
