@@ -137,7 +137,6 @@ namespace WindowsFormsProjectGDAL
             Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
         {
             function = new double[image.Width - model.Width, image.Height - model.Width];   //массив значений корреляционной функции
-            List<double> list = new List<double>();     //временно
 
             Point point = new Point();
 
@@ -170,7 +169,6 @@ namespace WindowsFormsProjectGDAL
                     }
                     F = F2 / (Math.Pow(F3, 0.5) * Math.Pow(F4, 0.5));
                     function[i, j] = F;     //корреляционная функция
-                    list.Add(F);    //временно
                     if (F > Fmax)
                     {
                         Fmax = F;
@@ -189,7 +187,6 @@ namespace WindowsFormsProjectGDAL
             sWatch.Stop();
             progressBar1.Value = 0;
             label23.Text = "max = " + Fmax.ToString();
-            list.Clear();
             return point;
         }
 

@@ -50,6 +50,8 @@ namespace WindowsFormsProjectGDAL
         private MyPoint k;
         private MyPoint t;
 
+        Rectangle firstRect;
+
         public AccuracyAlgorithms()
         {
             InitializeComponent();
@@ -139,6 +141,7 @@ namespace WindowsFormsProjectGDAL
             modelShow();
 
             Rectangle rect = coordinateSetting(downPoint, new Point(e.X, e.Y));
+            firstRect = new Rectangle(rect.X, rect.Y, rect.Width, rect.Height);
 
             aac.setPointModel(rect);
 
@@ -269,6 +272,95 @@ namespace WindowsFormsProjectGDAL
             label41.Text = "σ = ";
 
             button2.Enabled = true;
+
+            //first model
+            downPoint = new Point(firstRect.X, firstRect.Y);
+            upPoint = new Point(firstRect.X + firstRect.Width, firstRect.Y + firstRect.Height);
+            this.isClicked = false;
+
+            modelCreate(new Rectangle(firstRect.X, firstRect.Y, firstRect.Width, firstRect.Height));
+            modelShow();
+
+            Rectangle rect = coordinateSetting(downPoint, upPoint);
+            //firstRect = new Rectangle(rect.X, rect.Y, rect.Width, rect.Height);
+
+            aac.setPointModel(rect);
+
+            MyPoint point = aac.getPointModel();
+
+            label30.Text = "X t=" + point.x.ToString();
+            label29.Text = "Y t=" + point.y.ToString();
+
+            points.Clear();
+            points.Add(new Point((int)point.x, (int)point.y));
+            drawImage();
+
+            MyPoint pointAffine = aac.getPointModelTransform();
+
+            label27.Text = "X t=" + pointAffine.x.ToString();
+            label22.Text = "Y t=" + pointAffine.y.ToString();
+            t = new MyPoint(pointAffine.x, pointAffine.y);
+
+            points2.Clear();
+            points2.Add(new Point((int)pointAffine.x, (int)pointAffine.y));
+            drawImage2();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                button2_Click(sender, e);
+
+                //down
+                rectFind = new Rectangle(0, 0, 0, 0);
+                label20.Text = "X1=";
+                label19.Text = "Y1=";
+
+                downPoint = new Point(downPoint.X + 5, downPoint.Y);
+                label1.Text = "X1=" + downPoint.X.ToString("");
+                label2.Text = "Y1=" + downPoint.Y.ToString("");
+                label3.Text = "X2=";
+                label4.Text = "Y2=";
+
+                this.isClicked = true;
+
+                //move
+                if (isClicked) rectModel = coordinateSetting(downPoint, new Point(upPoint.X + 5, upPoint.Y));
+
+                //up
+                upPoint = new Point(upPoint.X + 5, upPoint.Y);
+                this.isClicked = false;
+
+                modelCreate(rectModel);
+                modelShow();
+
+                Rectangle rect = coordinateSetting(downPoint, upPoint);
+
+                aac.setPointModel(rect);
+
+                MyPoint point = aac.getPointModel();
+
+                label30.Text = "X t=" + point.x.ToString();
+                label29.Text = "Y t=" + point.y.ToString();
+
+                points.Clear();
+                points.Add(new Point((int)point.x, (int)point.y));
+                drawImage();
+
+                MyPoint pointAffine = aac.getPointModelTransform();
+
+                label27.Text = "X t=" + pointAffine.x.ToString();
+                label22.Text = "Y t=" + pointAffine.y.ToString();
+                t = new MyPoint(pointAffine.x, pointAffine.y);
+
+                points2.Clear();
+                points2.Add(new Point((int)pointAffine.x, (int)pointAffine.y));
+                drawImage2();
+
+                //click
+                button1_Click(sender, e);
+            }
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
