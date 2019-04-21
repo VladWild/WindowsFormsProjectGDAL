@@ -34,6 +34,7 @@ namespace WindowsFormsProjectGDAL
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -48,7 +49,6 @@ namespace WindowsFormsProjectGDAL
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label20 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -93,6 +93,16 @@ namespace WindowsFormsProjectGDAL
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(362, 336);
             this.panel2.TabIndex = 2;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(45, 294);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(276, 35);
+            this.button2.TabIndex = 32;
+            this.button2.Text = "Оценить точность корреляционных алгоритмов";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // textBox6
             // 
@@ -165,9 +175,9 @@ namespace WindowsFormsProjectGDAL
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(19, 8);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(103, 13);
+            this.label1.Size = new System.Drawing.Size(139, 13);
             this.label1.TabIndex = 17;
-            this.label1.Text = "Affine transformation";
+            this.label1.Text = "Афинное преобразование";
             // 
             // button1
             // 
@@ -175,7 +185,7 @@ namespace WindowsFormsProjectGDAL
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(276, 35);
             this.button1.TabIndex = 14;
-            this.button1.Text = "Show";
+            this.button1.Text = "Показать";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -197,9 +207,9 @@ namespace WindowsFormsProjectGDAL
             this.radioButton2.AutoSize = true;
             this.radioButton2.Location = new System.Drawing.Point(22, 71);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(150, 17);
+            this.radioButton2.Size = new System.Drawing.Size(219, 17);
             this.radioButton2.TabIndex = 2;
-            this.radioButton2.Text = "The integer part of number";
+            this.radioButton2.Text = "Отсечение дробной части от значения";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // radioButton1
@@ -208,10 +218,10 @@ namespace WindowsFormsProjectGDAL
             this.radioButton1.Checked = true;
             this.radioButton1.Location = new System.Drawing.Point(22, 48);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(119, 17);
+            this.radioButton1.Size = new System.Drawing.Size(160, 17);
             this.radioButton1.TabIndex = 1;
             this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Bilinear interpolation";
+            this.radioButton1.Text = "Билинейная интерполяция";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // label20
@@ -219,19 +229,9 @@ namespace WindowsFormsProjectGDAL
             this.label20.AutoSize = true;
             this.label20.Location = new System.Drawing.Point(6, 23);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(251, 13);
+            this.label20.Size = new System.Drawing.Size(235, 13);
             this.label20.TabIndex = 0;
-            this.label20.Text = "Methods for obtaining coordinates in a general form:";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(45, 294);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(276, 35);
-            this.button2.TabIndex = 32;
-            this.button2.Text = "Accurery of correlation algorithms";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.label20.Text = "Методы получения координат в общем виде:";
             // 
             // AffineTransformationForm
             // 
@@ -242,7 +242,7 @@ namespace WindowsFormsProjectGDAL
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "AffineTransformationForm";
-            this.Text = "AffineTransformation";
+            this.Text = "Афинное преобразование";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
