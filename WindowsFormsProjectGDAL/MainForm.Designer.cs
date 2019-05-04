@@ -192,9 +192,9 @@
             // 
             this.button10.Location = new System.Drawing.Point(369, 41);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(158, 52);
+            this.button10.Size = new System.Drawing.Size(510, 52);
             this.button10.TabIndex = 4;
-            this.button10.Text = "button10";
+            this.button10.Text = "Оценить точность алгоритмов корреляционного совмещения";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 

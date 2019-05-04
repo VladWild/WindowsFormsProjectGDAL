@@ -58,6 +58,11 @@ namespace WindowsFormsProjectGDAL
             AccuracyAlgorithms newForm = new AccuracyAlgorithms(origanalImage, origanalImage2, info);
             newForm.Show();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Picture.saveImage(this.pictureBox1);
+        }
     }
 }
 
