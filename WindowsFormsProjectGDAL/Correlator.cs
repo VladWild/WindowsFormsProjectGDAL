@@ -311,7 +311,7 @@ namespace WindowsFormsProjectGDAL
         public static Point normCorrilation(Colors color, Colors colorModel, Bitmap image, Bitmap model, 
             Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
         {
-            function = new double[rect.Width, rect.Height];   //массив значений корреляционной функции
+            function = new double[rect.Width + 1, rect.Height + 1];   //массив значений корреляционной функции
 
             Point point = new Point();
 

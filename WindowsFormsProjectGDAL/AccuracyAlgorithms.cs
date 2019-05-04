@@ -373,7 +373,38 @@ namespace WindowsFormsProjectGDAL
 
         private void button5_Click(object sender, EventArgs e)
         {
+            downPoint = new Point(Int32.Parse(textBox4.Text), Int32.Parse(textBox5.Text));
+            upPoint = new Point(Int32.Parse(textBox6.Text), Int32.Parse(textBox7.Text));
 
+            rectModel = new Rectangle(downPoint.X, downPoint.Y,
+                upPoint.X - downPoint.X, upPoint.Y - downPoint.Y);
+
+            modelCreate(rectModel);
+            modelShow();
+
+            aac.setPointModel(rectModel);
+
+            MyPoint point = aac.getPointModel();
+
+            label30.Text = "X = " + point.x.ToString();
+            label29.Text = "Y = " + point.y.ToString();
+
+            points.Clear();
+            points.Add(new Point((int)point.x, (int)point.y));
+            drawImage();
+
+            pointAffine = aac.getPointModelTransform();
+
+            label27.Text = "X t=" + pointAffine.x.ToString();
+            label22.Text = "Y t=" + pointAffine.y.ToString();
+            t = new MyPoint(pointAffine.x, pointAffine.y);
+
+            points2.Clear();
+            points2.Add(new Point((int)pointAffine.x, (int)pointAffine.y));
+            drawImage2();
+
+            label14.Text = "Ширина=" + rectModel.Width.ToString();
+            label15.Text = "Высота=" + rectModel.Height.ToString();
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
