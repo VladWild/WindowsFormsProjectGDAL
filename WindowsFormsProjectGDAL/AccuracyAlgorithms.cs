@@ -177,7 +177,7 @@ namespace WindowsFormsProjectGDAL
         private void info(Rectangle rect)
         {
             textBox4.Text = rect.X.ToString();
-            textBox5.Text = rect.X.ToString();
+            textBox5.Text = rect.Y.ToString();
             textBox6.Text = (rect.X + rect.Width).ToString();
             textBox7.Text = (rect.Y + rect.Height).ToString();
             label14.Text = "Ширина=" + rect.Width.ToString();
@@ -190,8 +190,8 @@ namespace WindowsFormsProjectGDAL
             label12.Text = "Y1=" + rect.Y.ToString();
             label11.Text = "X2=" + (rect.X + rect.Width).ToString();
             label10.Text = "Y2=" + (rect.Y + rect.Height).ToString();
-            label16.Text = "Width=" + rect.Width.ToString();
-            label17.Text = "Height=" + rect.Height.ToString();
+            label16.Text = "Ширина=" + rect.Width.ToString();
+            label17.Text = "Высота=" + rect.Height.ToString();
         }
 
         private void drawImage()

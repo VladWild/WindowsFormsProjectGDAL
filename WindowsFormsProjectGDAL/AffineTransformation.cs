@@ -163,7 +163,8 @@ namespace WindowsFormsProjectGDAL
             {
                 for (int x_ = 0; x_ < imageTransform.Width; x_++)
                 {
-                    x = getX(a0, a1, a2, x_, y_);
+                    //получение x и y расположения нужного пикселя на оригинальном изображении 
+                    x = getX(a0, a1, a2, x_, y_);   
                     y = getY(b0, b1, b2, x_, y_);
 
                     if (isWithInImage(imageOriginal, (int) x, (int) y)) continue;

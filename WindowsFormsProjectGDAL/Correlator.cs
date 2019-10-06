@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,8 @@ namespace WindowsFormsProjectGDAL
 
         private static double[,] function;
         private static Point pointPosition = new Point();
+
+        private static bool isSaveFunction = true;
 
         //возвращает прямоугольник области поиска
         private static Rectangle getRectSearch(Bitmap image, Rectangle rect)
@@ -136,7 +139,7 @@ namespace WindowsFormsProjectGDAL
         public static Point classicNorm(Colors color, Colors colorModel, Bitmap image, Bitmap model, 
             Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
         {
-            function = new double[rect.Width, rect.Height];   //массив значений корреляционной функции
+            function = new double[rect.Width - model.Width, rect.Height - model.Height];   //массив значений корреляционной функции
 
             Point point = new Point();
 
@@ -185,6 +188,8 @@ namespace WindowsFormsProjectGDAL
                 ++progressBar1.Value;
             }
             sWatch.Stop();
+            if (isSaveFunction) saveFunctionToFile("1_classic");
+            if (isSaveFunction) saveFunctionMinToFile("1_classic_min");
             progressBar1.Value = 0;
             label23.Text = "max = " + Fmax.ToString();
             return point;
@@ -194,7 +199,7 @@ namespace WindowsFormsProjectGDAL
         public static Point diffAbs(Colors color, Colors colorModel, Bitmap image, Bitmap model, 
             Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
         {
-            function = new double[rect.Width, rect.Height];   //массив значений корреляционной функции
+            function = new double[rect.Width - model.Width, rect.Height - model.Height];   //массив значений корреляционной функции
 
             Point point = new Point();
 
@@ -234,6 +239,7 @@ namespace WindowsFormsProjectGDAL
                 ++progressBar1.Value;
             }
             sWatch.Stop();
+            if (isSaveFunction) saveFunctionToFile("2_abs_diff");
             progressBar1.Value = 0;
             label23.Text = "min = " + Fmin.ToString();
             return point;
@@ -243,7 +249,7 @@ namespace WindowsFormsProjectGDAL
         public static Point diffSqr(Colors color, Colors colorModel, Bitmap image, Bitmap model, 
             Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
         {
-            function = new double[rect.Width, rect.Height];   //массив значений корреляционной функции
+            function = new double[rect.Width - model.Width, rect.Height - model.Height];   //массив значений корреляционной функции
 
             Point point = new Point();
 
@@ -284,6 +290,7 @@ namespace WindowsFormsProjectGDAL
                 ++progressBar1.Value;
             }
             sWatch.Stop();
+            if (isSaveFunction) saveFunctionToFile("3_sqrt_diff");
             progressBar1.Value = 0;
             label23.Text = "min = " + Fmin.ToString();
             return point;
@@ -311,7 +318,7 @@ namespace WindowsFormsProjectGDAL
         public static Point normCorrilation(Colors color, Colors colorModel, Bitmap image, Bitmap model, 
             Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
         {
-            function = new double[rect.Width + 1, rect.Height + 1];   //массив значений корреляционной функции
+            function = new double[rect.Width - model.Width, rect.Height - model.Height];   //массив значений корреляционной функции
 
             Point point = new Point();
 
@@ -364,6 +371,8 @@ namespace WindowsFormsProjectGDAL
                 ++progressBar1.Value;
             }
             sWatch.Stop();
+            if (isSaveFunction) saveFunctionToFile("4_norm");
+            if (isSaveFunction) saveFunctionMinToFile("4_norm_min");
             progressBar1.Value = 0;
             label23.Text = "max = " + Fmax.ToString();
             return point;
@@ -430,6 +439,70 @@ namespace WindowsFormsProjectGDAL
                 ((y2 - y3) * f1y + (y3 - y1) * f2y + (y1 - y2) * f3y);
 
             return subPixelPoint;
+        }
+
+        //сохранение матрицы значений корреляционной функции в файл
+        private static void saveFunctionToFile(string filename)
+        {
+            string path = @"D:\" + filename + ".txt";
+
+            using (FileStream fstream = new FileStream(path, FileMode.OpenOrCreate))
+            {
+                int width = function.GetLength(0);
+                int heigth = function.GetLength(1);
+
+                string text = "";
+
+                for (int i = 0; i < width; i++)
+                {
+                    for (int j = 0; j < heigth; j++)
+                    {
+                        text = text + function[i, j].ToString().Replace(',', '.') + "; ";
+                    }
+
+                    text = text.TrimEnd(text[text.Length - 2]);
+
+                    byte[] array4 = System.Text.Encoding.Default.GetBytes(text);
+                    fstream.Write(array4, 0, array4.Length);
+
+                    byte[] newline4 = Encoding.ASCII.GetBytes(Environment.NewLine);
+                    fstream.Write(newline4, 0, newline4.Length);
+
+                    text = "";
+                }
+            }
+        }
+
+        //сохранение матрицы значений корреляционной функции в файл
+        private static void saveFunctionMinToFile(string filename)
+        {
+            string path = @"D:\" + filename + ".txt";
+
+            using (FileStream fstream = new FileStream(path, FileMode.OpenOrCreate))
+            {
+                int width = function.GetLength(0);
+                int heigth = function.GetLength(1);
+
+                string text = "";
+
+                for (int i = 0; i < width; i++)
+                {
+                    for (int j = 0; j < heigth; j++)
+                    {
+                        text = text + (1 - function[i, j]).ToString().Replace(',', '.') + "; ";
+                    }
+
+                    text = text.TrimEnd(text[text.Length - 2]);
+
+                    byte[] array4 = System.Text.Encoding.Default.GetBytes(text);
+                    fstream.Write(array4, 0, array4.Length);
+
+                    byte[] newline4 = Encoding.ASCII.GetBytes(Environment.NewLine);
+                    fstream.Write(newline4, 0, newline4.Length);
+
+                    text = "";
+                }
+            }
         }
     }
 
