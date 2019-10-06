@@ -52,6 +52,9 @@ namespace WindowsFormsProjectGDAL
 
         Rectangle firstRect;
 
+        MyPoint pointAffine;
+        MyPoint pointWithOut;
+
         public AccuracyAlgorithms()
         {
             InitializeComponent();
@@ -147,14 +150,14 @@ namespace WindowsFormsProjectGDAL
 
             MyPoint point = aac.getPointModel();
 
-            label30.Text = "X t=" + point.x.ToString();
-            label29.Text = "Y t=" + point.y.ToString();
+            label30.Text = "X = " + point.x.ToString();
+            label29.Text = "Y = " + point.y.ToString();
 
             points.Clear();
             points.Add(new Point((int)point.x, (int)point.y));
             drawImage();
 
-            MyPoint pointAffine = aac.getPointModelTransform();
+            pointAffine = aac.getPointModelTransform();
 
             label27.Text = "X t=" + pointAffine.x.ToString();
             label22.Text = "Y t=" + pointAffine.y.ToString();
@@ -173,12 +176,12 @@ namespace WindowsFormsProjectGDAL
 
         private void info(Rectangle rect)
         {
-            label1.Text = "X1=" + rect.X.ToString();
-            label2.Text = "Y1=" + rect.Y.ToString();
-            label3.Text = "X2=" + (rect.X + rect.Width).ToString();
-            label4.Text = "Y2=" + (rect.Y + rect.Height).ToString();
-            label14.Text = "Width=" + rect.Width.ToString();
-            label15.Text = "Height=" + rect.Height.ToString();
+            textBox4.Text = rect.X.ToString();
+            textBox5.Text = rect.Y.ToString();
+            textBox6.Text = (rect.X + rect.Width).ToString();
+            textBox7.Text = (rect.Y + rect.Height).ToString();
+            label14.Text = "Ширина=" + rect.Width.ToString();
+            label15.Text = "Высота=" + rect.Height.ToString();
         }
 
         private void info2(Rectangle rect)
@@ -187,8 +190,8 @@ namespace WindowsFormsProjectGDAL
             label12.Text = "Y1=" + rect.Y.ToString();
             label11.Text = "X2=" + (rect.X + rect.Width).ToString();
             label10.Text = "Y2=" + (rect.Y + rect.Height).ToString();
-            label16.Text = "Width=" + rect.Width.ToString();
-            label17.Text = "Height=" + rect.Height.ToString();
+            label16.Text = "Ширина=" + rect.Width.ToString();
+            label17.Text = "Высота=" + rect.Height.ToString();
         }
 
         private void drawImage()
@@ -254,7 +257,7 @@ namespace WindowsFormsProjectGDAL
         {
             aac.add(k, t);
 
-            label38.Text = "Count = " + aac.getCount().ToString();
+            label38.Text = "Текущая итерация = " + aac.getCount().ToString();
             label39.Text = "Sx = " + aac.getSx().ToString();
             label40.Text = "Sy = " + aac.getSy().ToString();
             label41.Text = "σ = " + aac.getSko().ToString();
@@ -308,7 +311,12 @@ namespace WindowsFormsProjectGDAL
 
         private void button4_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < 20; i++)
+            int count = Int32.Parse(textBox1.Text);
+
+            int dx = Int32.Parse(textBox2.Text);
+            int dy = Int32.Parse(textBox3.Text);
+
+            for (int i = 0; i < count; i++)
             {
                 button2_Click(sender, e);
 
@@ -317,7 +325,7 @@ namespace WindowsFormsProjectGDAL
                 label20.Text = "X1=";
                 label19.Text = "Y1=";
 
-                downPoint = new Point(downPoint.X + 5, downPoint.Y);
+                downPoint = new Point(downPoint.X + dx, downPoint.Y + dy);
                 label1.Text = "X1=" + downPoint.X.ToString("");
                 label2.Text = "Y1=" + downPoint.Y.ToString("");
                 label3.Text = "X2=";
@@ -326,10 +334,10 @@ namespace WindowsFormsProjectGDAL
                 this.isClicked = true;
 
                 //move
-                if (isClicked) rectModel = coordinateSetting(downPoint, new Point(upPoint.X + 5, upPoint.Y));
+                if (isClicked) rectModel = coordinateSetting(downPoint, new Point(upPoint.X + dx, upPoint.Y + dy));
 
                 //up
-                upPoint = new Point(upPoint.X + 5, upPoint.Y);
+                upPoint = new Point(upPoint.X + dx, upPoint.Y + dy);
                 this.isClicked = false;
 
                 modelCreate(rectModel);
@@ -361,6 +369,42 @@ namespace WindowsFormsProjectGDAL
                 //click
                 button1_Click(sender, e);
             }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            downPoint = new Point(Int32.Parse(textBox4.Text), Int32.Parse(textBox5.Text));
+            upPoint = new Point(Int32.Parse(textBox6.Text), Int32.Parse(textBox7.Text));
+
+            rectModel = new Rectangle(downPoint.X, downPoint.Y,
+                upPoint.X - downPoint.X, upPoint.Y - downPoint.Y);
+
+            modelCreate(rectModel);
+            modelShow();
+
+            aac.setPointModel(rectModel);
+
+            MyPoint point = aac.getPointModel();
+
+            label30.Text = "X = " + point.x.ToString();
+            label29.Text = "Y = " + point.y.ToString();
+
+            points.Clear();
+            points.Add(new Point((int)point.x, (int)point.y));
+            drawImage();
+
+            pointAffine = aac.getPointModelTransform();
+
+            label27.Text = "X t=" + pointAffine.x.ToString();
+            label22.Text = "Y t=" + pointAffine.y.ToString();
+            t = new MyPoint(pointAffine.x, pointAffine.y);
+
+            points2.Clear();
+            points2.Add(new Point((int)pointAffine.x, (int)pointAffine.y));
+            drawImage2();
+
+            label14.Text = "Ширина=" + rectModel.Width.ToString();
+            label15.Text = "Высота=" + rectModel.Height.ToString();
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -529,7 +573,7 @@ namespace WindowsFormsProjectGDAL
                         rectSearch, progressBar1, sWatch, label23);
                     break;
                 default:
-                    MessageBox.Show("Select correlations");
+                    MessageBox.Show("Выберете алгоритм");
                     break;
             }
 
@@ -537,7 +581,7 @@ namespace WindowsFormsProjectGDAL
             {
                 rectFind = new Rectangle(point, Model.modelImage.Size);
 
-                MyPoint pointWithOut = new MyPoint(((double)(2 * point.X + Model.modelImage.Width)) / 2d,
+                pointWithOut = new MyPoint(((double)(2 * point.X + Model.modelImage.Width)) / 2d,
                     ((double)(2 * point.Y + Model.modelImage.Height)) / 2d);
 
                 points4.Clear();
@@ -548,6 +592,7 @@ namespace WindowsFormsProjectGDAL
                 MyPoint myPoint = new MyPoint();
                 if (index == 0 || index == 3) myPoint = Correlator.getPointSubShiftMax();
                 if (index == 1 || index == 2) myPoint = Correlator.getPointSubShiftMin();
+                correctedSignMyPointdXdY(myPoint);
                 label37.Text = "dx=" + myPoint.x.ToString();
                 label36.Text = "dy=" + myPoint.y.ToString();
 
@@ -560,7 +605,7 @@ namespace WindowsFormsProjectGDAL
                 label20.Text = "X1=" + point.X;
                 label19.Text = "Y1=" + point.Y;
                 label24.Text = "time = " + (((double)sWatch.ElapsedMilliseconds) / 1000).ToString() + " sec";
-                MessageBox.Show("Rectangle found");
+                MessageBox.Show("Прямоугольная область найдена");
             }
 
             button2.Enabled = true;
@@ -594,6 +639,12 @@ namespace WindowsFormsProjectGDAL
             modelForm.setImageInPuctureBox(modelImage);
             modelForm.setSize(rectModel);
             modelForm.Show();
+        }
+
+        private void correctedSignMyPointdXdY(MyPoint myPoint)
+        {
+            myPoint.x = pointAffine.x > pointWithOut.x ? Math.Abs(myPoint.x) : - Math.Abs(myPoint.x);
+            myPoint.y = pointAffine.y > pointWithOut.y ? Math.Abs(myPoint.y) : - Math.Abs(myPoint.y);
         }
 
     }

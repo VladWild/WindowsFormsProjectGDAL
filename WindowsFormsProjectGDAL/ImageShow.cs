@@ -196,8 +196,8 @@ namespace WindowsFormsProjectGDAL
                 label2.Text = "Y1=" + rect.Y.ToString();
                 label3.Text = "X2=" + (rect.X + rect.Width).ToString();
                 label4.Text = "Y2=" + (rect.Y + rect.Height).ToString();
-                label14.Text = "Width=" + rect.Width.ToString();
-                label15.Text = "Height=" + rect.Height.ToString();
+                label14.Text = "Ширина=" + rect.Width.ToString();
+                label15.Text = "Высота=" + rect.Height.ToString();
             }
             if (radioButton3.Checked)
             {
@@ -205,8 +205,8 @@ namespace WindowsFormsProjectGDAL
                 label12.Text = "Y1=" + rect.Y.ToString();
                 label11.Text = "X2=" + (rect.X + rect.Width).ToString();
                 label10.Text = "Y2=" + (rect.Y + rect.Height).ToString();
-                label16.Text = "Width=" + rect.Width.ToString();
-                label17.Text = "Height=" + rect.Height.ToString();
+                label16.Text = "Ширина=" + rect.Width.ToString();
+                label17.Text = "Высота=" + rect.Height.ToString();
             }
 
 
@@ -311,7 +311,7 @@ namespace WindowsFormsProjectGDAL
                         rectSearch, progressBar1, sWatch, label23);
                     break;
                 default:
-                    MessageBox.Show("Select correlations");
+                    MessageBox.Show("Выберете корреляционный алгоритм для поиска");
                     break;
             }
 
@@ -321,8 +321,8 @@ namespace WindowsFormsProjectGDAL
                 drawImage();
                 label20.Text = "X1=" + point.X;
                 label19.Text = "Y1=" + point.Y;
-                label24.Text = "time = " + (((double)sWatch.ElapsedMilliseconds) / 1000).ToString() + " sec";
-                MessageBox.Show("Rectangle found");
+                label24.Text = "время = " + (((double)sWatch.ElapsedMilliseconds) / 1000).ToString() + " сек";
+                MessageBox.Show("Фрагмент найден");
             }
 
         }
@@ -339,6 +339,11 @@ namespace WindowsFormsProjectGDAL
             if (colorImage == Colors.BLUE) NewImage.bluePoint = new Point(rectFind.X, rectFind.Y);
             if (colorImage == Colors.GREEN) NewImage.greenPoint = new Point(rectFind.X, rectFind.Y);
             if (colorImage == Colors.RED) NewImage.redPoint = new Point(rectFind.X, rectFind.Y);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Picture.saveImage(this.pictureBox1);
         }
     }
 }

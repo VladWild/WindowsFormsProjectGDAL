@@ -35,7 +35,7 @@ namespace WindowsFormsProjectGDAL
             newPoint.y = (info.a1 * p.y - info.a1 * info.b0 - info.b1 * p.x + info.a0 * info.b1) /
                 (info.a1 * info.b2 - info.b1 * info.a2);
 
-            return newPoint;
+            return newPoint; 
         }
 
         //расчет координат начальной особой точки и их сохранение на исходном и преобразованном изображении 

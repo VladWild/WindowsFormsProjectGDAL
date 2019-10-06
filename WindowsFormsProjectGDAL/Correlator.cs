@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,8 @@ namespace WindowsFormsProjectGDAL
 
         private static double[,] function;
         private static Point pointPosition = new Point();
+
+        private static bool isSaveFunction = true;
 
         //возвращает прямоугольник области поиска
         private static Rectangle getRectSearch(Bitmap image, Rectangle rect)
@@ -136,7 +139,7 @@ namespace WindowsFormsProjectGDAL
         public static Point classicNorm(Colors color, Colors colorModel, Bitmap image, Bitmap model, 
             Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
         {
-            function = new double[image.Width - model.Width, image.Height - model.Width];   //массив значений корреляционной функции
+            function = new double[rect.Width - model.Width, rect.Height - model.Height];   //массив значений корреляционной функции
 
             Point point = new Point();
 
@@ -174,8 +177,8 @@ namespace WindowsFormsProjectGDAL
                         Fmax = F;
                         point.X = rectSearch.X + i;
                         point.Y = rectSearch.Y + j;
-                        pointPosition.X = j;        //положение x - максимума в корреляционной функции
-                        pointPosition.Y = i;        //положение y - максимума в корреляционной функции
+                        pointPosition.X = i;        //положение x - максимума в корреляционной функции
+                        pointPosition.Y = j;        //положение y - максимума в корреляционной функции
                     }
                     F = 0;
                     F2 = 0;
@@ -185,6 +188,8 @@ namespace WindowsFormsProjectGDAL
                 ++progressBar1.Value;
             }
             sWatch.Stop();
+            if (isSaveFunction) saveFunctionToFile("1_classic");
+            if (isSaveFunction) saveFunctionMinToFile("1_classic_min");
             progressBar1.Value = 0;
             label23.Text = "max = " + Fmax.ToString();
             return point;
@@ -194,7 +199,7 @@ namespace WindowsFormsProjectGDAL
         public static Point diffAbs(Colors color, Colors colorModel, Bitmap image, Bitmap model, 
             Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
         {
-            function = new double[image.Width - model.Width, image.Height - model.Width];   //массив значений корреляционной функции
+            function = new double[rect.Width - model.Width, rect.Height - model.Height];   //массив значений корреляционной функции
 
             Point point = new Point();
 
@@ -226,14 +231,15 @@ namespace WindowsFormsProjectGDAL
                         Fmin = F;
                         point.X = rectSearch.X + i;
                         point.Y = rectSearch.Y + j;
-                        pointPosition.X = j;        //положение x - минимума в корреляционной функции
-                        pointPosition.Y = i;        //положение y - минимума в корреляционной функции
+                        pointPosition.X = i;        //положение x - минимума в корреляционной функции
+                        pointPosition.Y = j;        //положение y - минимума в корреляционной функции
                     }
                     F = 0;
                 }
                 ++progressBar1.Value;
             }
             sWatch.Stop();
+            if (isSaveFunction) saveFunctionToFile("2_abs_diff");
             progressBar1.Value = 0;
             label23.Text = "min = " + Fmin.ToString();
             return point;
@@ -243,7 +249,7 @@ namespace WindowsFormsProjectGDAL
         public static Point diffSqr(Colors color, Colors colorModel, Bitmap image, Bitmap model, 
             Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
         {
-            function = new double[image.Width - model.Width, image.Height - model.Width];   //массив значений корреляционной функции
+            function = new double[rect.Width - model.Width, rect.Height - model.Height];   //массив значений корреляционной функции
 
             Point point = new Point();
 
@@ -276,14 +282,15 @@ namespace WindowsFormsProjectGDAL
                         Fmin = F;
                         point.X = rectSearch.X + i;
                         point.Y = rectSearch.Y + j;
-                        pointPosition.X = j;        //положение x - минимума в корреляционной функции
-                        pointPosition.Y = i;        //положение y - минимума в корреляционной функции
+                        pointPosition.X = i;        //положение x - минимума в корреляционной функции
+                        pointPosition.Y = j;        //положение y - минимума в корреляционной функции
                     }
                     F = 0;
                 }
                 ++progressBar1.Value;
             }
             sWatch.Stop();
+            if (isSaveFunction) saveFunctionToFile("3_sqrt_diff");
             progressBar1.Value = 0;
             label23.Text = "min = " + Fmin.ToString();
             return point;
@@ -311,7 +318,7 @@ namespace WindowsFormsProjectGDAL
         public static Point normCorrilation(Colors color, Colors colorModel, Bitmap image, Bitmap model, 
             Rectangle rect, ProgressBar progressBar1, Stopwatch sWatch, Label label23)
         {
-            function = new double[image.Width - model.Width, image.Height - model.Width];   //массив значений корреляционной функции
+            function = new double[rect.Width - model.Width, rect.Height - model.Height];   //массив значений корреляционной функции
 
             Point point = new Point();
 
@@ -354,8 +361,8 @@ namespace WindowsFormsProjectGDAL
                         Fmax = F;
                         point.X = rectSearch.X + i;
                         point.Y = rectSearch.Y + j;
-                        pointPosition.X = j;        //положение x - максимума в корреляционной функции
-                        pointPosition.Y = i;        //положение y - максимума в корреляционной функции
+                        pointPosition.X = i;        //положение x - максимума в корреляционной функции
+                        pointPosition.Y = j;        //положение y - максимума в корреляционной функции
                     }
                     F = 0;
                     infoImage.mean = 0;
@@ -364,6 +371,8 @@ namespace WindowsFormsProjectGDAL
                 ++progressBar1.Value;
             }
             sWatch.Stop();
+            if (isSaveFunction) saveFunctionToFile("4_norm");
+            if (isSaveFunction) saveFunctionMinToFile("4_norm_min");
             progressBar1.Value = 0;
             label23.Text = "max = " + Fmax.ToString();
             return point;
@@ -371,44 +380,129 @@ namespace WindowsFormsProjectGDAL
 
         public static MyPoint getPointSubShiftMax()
         {
-            MyPoint myPoint = new MyPoint();
+            double f1x = 1 - function[pointPosition.X - 1, pointPosition.Y];
+            double f2x = 1 - function[pointPosition.X, pointPosition.Y];
+            double f3x = 1 - function[pointPosition.X + 1, pointPosition.Y];
 
-            double a1x = 0.5d * (function[pointPosition.Y, pointPosition.X + 1] - 
-                function[pointPosition.Y, pointPosition.X - 1]);
-            double a2x = 0.5d * (function[pointPosition.Y, pointPosition.X + 1] +
-                function[pointPosition.Y, pointPosition.X - 1]);
+            double x1 = pointPosition.X - 1;
+            double x2 = pointPosition.X;
+            double x3 = pointPosition.X + 1;
 
-            myPoint.x = 0.5d * (a1x / a2x);
+            double f1y = 1 - function[pointPosition.X, pointPosition.Y - 1];
+            double f2y = 1 - function[pointPosition.X, pointPosition.Y];
+            double f3y = 1 - function[pointPosition.X, pointPosition.Y + 1];
 
-            double a1y = 0.5d * (function[pointPosition.Y + 1, pointPosition.X] -
-                function[pointPosition.Y - 1, pointPosition.X]);
-            double a2y = 0.5d * (function[pointPosition.Y + 1, pointPosition.X] +
-                function[pointPosition.Y - 1, pointPosition.X]);
+            double y1 = pointPosition.Y - 1;
+            double y2 = pointPosition.Y;
+            double y3 = pointPosition.Y + 1;
 
-            myPoint.y = 0.5d * (a1y / a2y);
+            MyPoint myPoint = getNewPointByPowellMethod(f1x, f2x, f3x, x1, x2, x3,
+                f1y, f2y, f3y, y1, y2, y3);
 
-            return myPoint;
+            return new MyPoint(pointPosition.X - myPoint.x, pointPosition.Y - myPoint.y);
         }
 
         public static MyPoint getPointSubShiftMin()
         {
-            MyPoint myPoint = new MyPoint();
+            double f1x = function[pointPosition.X - 1, pointPosition.Y];
+            double f2x = function[pointPosition.X, pointPosition.Y];
+            double f3x = function[pointPosition.X + 1, pointPosition.Y];
 
-            double a1x = 0.5d * (function[pointPosition.Y, pointPosition.X + 1] -
-                function[pointPosition.Y, pointPosition.X - 1]);
-            double a2x = 0.5d * (function[pointPosition.Y, pointPosition.X + 1] +
-                function[pointPosition.Y, pointPosition.X - 1]);
+            double x1 = pointPosition.X - 1;
+            double x2 = pointPosition.X;
+            double x3 = pointPosition.X + 1;
 
-            myPoint.x = - 0.5d * (a1x / a2x);
+            double f1y = function[pointPosition.X, pointPosition.Y - 1];
+            double f2y = function[pointPosition.X, pointPosition.Y];
+            double f3y = function[pointPosition.X, pointPosition.Y + 1];
 
-            double a1y = 0.5d * (function[pointPosition.Y + 1, pointPosition.X] -
-                function[pointPosition.Y - 1, pointPosition.X]);
-            double a2y = 0.5d * (function[pointPosition.Y + 1, pointPosition.X] +
-                function[pointPosition.Y - 1, pointPosition.X]);
+            double y1 = pointPosition.Y - 1;
+            double y2 = pointPosition.Y;
+            double y3 = pointPosition.Y + 1;
 
-            myPoint.y = - 0.5d * (a1y / a2y);
+            MyPoint myPoint = getNewPointByPowellMethod(f1x, f2x, f3x, x1, x2, x3,
+                f1y, f2y, f3y, y1, y2, y3);
 
-            return myPoint;
+            return new MyPoint(pointPosition.X - myPoint.x, pointPosition.Y - myPoint.y);
+        }
+
+        private static MyPoint getNewPointByPowellMethod(
+            double f1x, double f2x, double f3x, double x1, double x2, double x3,
+            double f1y, double f2y, double f3y, double y1, double y2, double y3)
+        {
+            MyPoint subPixelPoint = new MyPoint();
+
+            subPixelPoint.x = 0.5d * ((x2 * x2 - x3 * x3) * f1x + (x3 * x3 - x1 * x1) * f2x + (x1 * x1 - x2 * x2) * f3x) /
+                ((x2 - x3) * f1x + (x3 - x1) * f2x + (x1 - x2) * f3x);
+
+            subPixelPoint.y = 0.5d * ((y2 * y2 - y3 * y3) * f1y + (y3 * y3 - y1 * y1) * f2y + (y1 * y1 - y2 * y2) * f3y) /
+                ((y2 - y3) * f1y + (y3 - y1) * f2y + (y1 - y2) * f3y);
+
+            return subPixelPoint;
+        }
+
+        //сохранение матрицы значений корреляционной функции в файл
+        private static void saveFunctionToFile(string filename)
+        {
+            string path = @"D:\" + filename + ".txt";
+
+            using (FileStream fstream = new FileStream(path, FileMode.OpenOrCreate))
+            {
+                int width = function.GetLength(0);
+                int heigth = function.GetLength(1);
+
+                string text = "";
+
+                for (int i = 0; i < width; i++)
+                {
+                    for (int j = 0; j < heigth; j++)
+                    {
+                        text = text + function[i, j].ToString().Replace(',', '.') + "; ";
+                    }
+
+                    text = text.TrimEnd(text[text.Length - 2]);
+
+                    byte[] array4 = System.Text.Encoding.Default.GetBytes(text);
+                    fstream.Write(array4, 0, array4.Length);
+
+                    byte[] newline4 = Encoding.ASCII.GetBytes(Environment.NewLine);
+                    fstream.Write(newline4, 0, newline4.Length);
+
+                    text = "";
+                }
+            }
+        }
+
+        //сохранение матрицы значений корреляционной функции в файл
+        private static void saveFunctionMinToFile(string filename)
+        {
+            string path = @"D:\" + filename + ".txt";
+
+            using (FileStream fstream = new FileStream(path, FileMode.OpenOrCreate))
+            {
+                int width = function.GetLength(0);
+                int heigth = function.GetLength(1);
+
+                string text = "";
+
+                for (int i = 0; i < width; i++)
+                {
+                    for (int j = 0; j < heigth; j++)
+                    {
+                        text = text + (1 - function[i, j]).ToString().Replace(',', '.') + "; ";
+                    }
+
+                    text = text.TrimEnd(text[text.Length - 2]);
+
+                    byte[] array4 = System.Text.Encoding.Default.GetBytes(text);
+                    fstream.Write(array4, 0, array4.Length);
+
+                    byte[] newline4 = Encoding.ASCII.GetBytes(Environment.NewLine);
+                    fstream.Write(newline4, 0, newline4.Length);
+
+                    text = "";
+                }
+            }
         }
     }
 

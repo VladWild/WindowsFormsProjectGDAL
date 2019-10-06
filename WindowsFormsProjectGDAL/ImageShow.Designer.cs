@@ -37,7 +37,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.label22 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -70,6 +69,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.button1 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -87,7 +87,7 @@
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(539, 407);
+            this.panel1.Size = new System.Drawing.Size(638, 407);
             this.panel1.TabIndex = 1;
             // 
             // pictureBox1
@@ -106,10 +106,10 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.panel2.Controls.Add(this.button4);
             this.panel2.Controls.Add(this.button3);
             this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.panel3);
-            this.panel2.Controls.Add(this.label22);
             this.panel2.Controls.Add(this.label21);
             this.panel2.Controls.Add(this.listBox1);
             this.panel2.Controls.Add(this.panel7);
@@ -121,26 +121,26 @@
             this.panel2.Controls.Add(this.button1);
             this.panel2.Location = new System.Drawing.Point(0, 413);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(539, 169);
+            this.panel2.Size = new System.Drawing.Size(638, 169);
             this.panel2.TabIndex = 3;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(401, 132);
+            this.button3.Location = new System.Drawing.Point(405, 123);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(131, 30);
+            this.button3.Size = new System.Drawing.Size(134, 39);
             this.button3.TabIndex = 19;
-            this.button3.Text = "Save FR Coordinates";
+            this.button3.Text = "Сохранить координаты найденного фрагмента";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(401, 96);
+            this.button2.Location = new System.Drawing.Point(405, 88);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(131, 30);
+            this.button2.Size = new System.Drawing.Size(134, 35);
             this.button2.TabIndex = 18;
-            this.button2.Text = "Save Model Coordinates";
+            this.button2.Text = "Сохранить координаты выделеной модели";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -152,70 +152,61 @@
             this.panel3.Controls.Add(this.radioButton1);
             this.panel3.Location = new System.Drawing.Point(259, 8);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(89, 66);
+            this.panel3.Size = new System.Drawing.Size(75, 66);
             this.panel3.TabIndex = 17;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 6);
+            this.label5.Location = new System.Drawing.Point(3, 6);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(36, 13);
+            this.label5.Size = new System.Drawing.Size(46, 13);
             this.label5.TabIndex = 2;
-            this.label5.Text = "Model";
+            this.label5.Text = "Модель";
             // 
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(12, 40);
+            this.radioButton2.Location = new System.Drawing.Point(6, 40);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(47, 17);
+            this.radioButton2.Size = new System.Drawing.Size(56, 17);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Gray";
+            this.radioButton2.Text = "Серая";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(12, 22);
+            this.radioButton1.Location = new System.Drawing.Point(6, 22);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(49, 17);
+            this.radioButton1.Size = new System.Drawing.Size(68, 17);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Color";
+            this.radioButton1.Text = "Цветная";
             this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(441, 21);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(59, 13);
-            this.label22.TabIndex = 16;
-            this.label22.Text = "correlation:";
             // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(441, 8);
+            this.label21.Location = new System.Drawing.Point(453, 8);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(52, 13);
+            this.label21.Size = new System.Drawing.Size(150, 13);
             this.label21.TabIndex = 15;
-            this.label21.Text = "Сhoice of";
+            this.label21.Text = "Выбор кор. алг. для поиска:";
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Items.AddRange(new object[] {
-            "ClassicNorm",
-            "DiffAbs",
-            "DiffSqr",
-            "NormCorrelation"});
-            this.listBox1.Location = new System.Drawing.Point(441, 37);
+            "Класс. кор. алг. с норм.",
+            "Модуль разн.",
+            "Квадрат разн.",
+            "Норм. взаим. кор. функ."});
+            this.listBox1.Location = new System.Drawing.Point(456, 24);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(91, 56);
+            this.listBox1.Size = new System.Drawing.Size(179, 56);
             this.listBox1.TabIndex = 14;
             // 
             // panel7
@@ -229,17 +220,17 @@
             this.panel7.Controls.Add(this.label18);
             this.panel7.Location = new System.Drawing.Point(259, 80);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(136, 82);
+            this.panel7.Size = new System.Drawing.Size(140, 82);
             this.panel7.TabIndex = 13;
             // 
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(3, 43);
+            this.label25.Location = new System.Drawing.Point(-1, 43);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(28, 13);
+            this.label25.Size = new System.Drawing.Size(38, 13);
             this.label25.TabIndex = 10;
-            this.label25.Text = "Info:";
+            this.label25.Text = "Инфо:";
             // 
             // label24
             // 
@@ -280,9 +271,9 @@
             this.label18.AutoSize = true;
             this.label18.Location = new System.Drawing.Point(0, 3);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(89, 13);
+            this.label18.Size = new System.Drawing.Size(112, 13);
             this.label18.TabIndex = 0;
-            this.label18.Text = "Found Rectangle";
+            this.label18.Text = "Найденый фрагмент";
             // 
             // panel6
             // 
@@ -304,27 +295,27 @@
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(8, 75);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(44, 13);
+            this.label16.Size = new System.Drawing.Size(51, 13);
             this.label16.TabIndex = 14;
-            this.label16.Text = "Heigth=";
+            this.label16.Text = "Высота=";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(8, 62);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(41, 13);
+            this.label17.Size = new System.Drawing.Size(52, 13);
             this.label17.TabIndex = 13;
-            this.label17.Text = "Width=";
+            this.label17.Text = "Ширина=";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(3, 4);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(41, 13);
+            this.label9.Size = new System.Drawing.Size(89, 13);
             this.label9.TabIndex = 10;
-            this.label9.Text = "Search";
+            this.label9.Text = "Область поиска";
             // 
             // label10
             // 
@@ -383,27 +374,27 @@
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(8, 75);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(44, 13);
+            this.label15.Size = new System.Drawing.Size(51, 13);
             this.label15.TabIndex = 12;
-            this.label15.Text = "Heigth=";
+            this.label15.Text = "Высота=";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(8, 62);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(41, 13);
+            this.label14.Size = new System.Drawing.Size(52, 13);
             this.label14.TabIndex = 11;
-            this.label14.Text = "Width=";
+            this.label14.Text = "Ширина=";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(3, 4);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(36, 13);
+            this.label8.Size = new System.Drawing.Size(46, 13);
             this.label8.TabIndex = 10;
-            this.label8.Text = "Model";
+            this.label8.Text = "Модель";
             // 
             // label4
             // 
@@ -448,9 +439,9 @@
             this.panel4.Controls.Add(this.label7);
             this.panel4.Controls.Add(this.radioButton3);
             this.panel4.Controls.Add(this.radioButton4);
-            this.panel4.Location = new System.Drawing.Point(354, 8);
+            this.panel4.Location = new System.Drawing.Point(340, 8);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(81, 66);
+            this.panel4.Size = new System.Drawing.Size(113, 66);
             this.panel4.TabIndex = 8;
             // 
             // label7
@@ -458,19 +449,19 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(3, 6);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(56, 13);
+            this.label7.Size = new System.Drawing.Size(57, 13);
             this.label7.TabIndex = 2;
-            this.label7.Text = "Rectangle";
+            this.label7.Text = "Выделить";
             // 
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
             this.radioButton3.Location = new System.Drawing.Point(6, 40);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(59, 17);
+            this.radioButton3.Size = new System.Drawing.Size(107, 17);
             this.radioButton3.TabIndex = 1;
             this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Search";
+            this.radioButton3.Text = "Область поиска";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // radioButton4
@@ -479,10 +470,10 @@
             this.radioButton4.Checked = true;
             this.radioButton4.Location = new System.Drawing.Point(6, 22);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(54, 17);
+            this.radioButton4.Size = new System.Drawing.Size(64, 17);
             this.radioButton4.TabIndex = 0;
             this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Model";
+            this.radioButton4.Text = "Модель";
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
             // label6
@@ -490,9 +481,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(11, 8);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(44, 13);
+            this.label6.Size = new System.Drawing.Size(93, 13);
             this.label6.TabIndex = 7;
-            this.label6.Text = "Search:";
+            this.label6.Text = "Процесс поиска:";
             // 
             // progressBar1
             // 
@@ -507,15 +498,25 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 43);
             this.button1.TabIndex = 5;
-            this.button1.Text = "Search";
+            this.button1.Text = "Поиск";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(545, 90);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(90, 72);
+            this.button4.TabIndex = 2;
+            this.button4.Text = "Сохранить изображение";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // PictureShow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(539, 584);
+            this.ClientSize = new System.Drawing.Size(639, 584);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "PictureShow";
@@ -572,7 +573,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Panel panel3;
@@ -584,5 +584,6 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Button button4;
     }
 }
